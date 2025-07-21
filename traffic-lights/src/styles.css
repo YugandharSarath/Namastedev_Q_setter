@@ -1,0 +1,36 @@
+.traffic-container {
+  width: 100px;
+  background: #333;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.light {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #555;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.light.on {
+  opacity: 1;
+}
+
+.red.on {
+  background-color: red;
+}
+
+.yellow.on {
+  background-color: yellow;
+}
+
+.green.on {
+  background-color: green;
+}

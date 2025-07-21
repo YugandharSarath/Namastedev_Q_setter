@@ -1,0 +1,8 @@
+{
+  "title": "Color Code Game",
+  "description": "Guess which color matches the given HEX code by selecting one of the three boxes.",
+  "difficulty": "Easy",
+  "topics": ["React", "useState", "useEffect", "Random", "CSS"],
+  "time": "15 mins",
+  "companies": ["Frontend Fun Inc"]
+}

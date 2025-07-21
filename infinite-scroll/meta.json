@@ -1,0 +1,17 @@
+{
+  "title": "Infinite Scroll",
+  "description": "Build an infinite scroll component in React that loads more items when the user reaches the bottom of the page.",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "hooks",
+    "intersection-observer",
+    "frontend",
+    "infinite-scroll",
+    "pagination"
+  ],
+  "author": "Sarath",
+  "starterFiles": ["App.tsx", "mockFetch.ts"],
+  "solutionFile": "solution.tsx",
+  "testCasesFile": "test-cases.md"
+}

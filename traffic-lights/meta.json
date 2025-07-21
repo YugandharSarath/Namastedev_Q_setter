@@ -1,0 +1,10 @@
+{
+  "title": "Traffic Light System",
+  "difficulty": "Beginner",
+  "tags": ["React", "TypeScript", "UI", "Timer", "CSS"],
+  "language": "TypeScript",
+  "framework": "React",
+  "cssFramework": "None",
+  "dependencies": [],
+  "description": "A basic Traffic Light system built with React and TypeScript that cycles through Red, Green, and Yellow lights using timers."
+}

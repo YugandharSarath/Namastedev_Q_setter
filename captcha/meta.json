@@ -1,0 +1,21 @@
+{
+  "title": "Captcha Generator",
+  "description": "A React + TypeScript based Captcha Generator that creates a distorted canvas image with alphanumeric captcha text, supports user validation, and provides a refresh button.",
+  "difficulty": "beginner",
+  "technologies": ["React", "TypeScript", "Canvas", "CSS"],
+  "features": [
+    "Random alphanumeric captcha generation",
+    "Canvas rendering with distortion",
+    "User input validation",
+    "Refresh captcha functionality",
+    "Responsive UI"
+  ],
+  "tags": [
+    "captcha",
+    "form validation",
+    "canvas",
+    "react-component",
+    "frontend",
+    "typescript"
+  ]
+}

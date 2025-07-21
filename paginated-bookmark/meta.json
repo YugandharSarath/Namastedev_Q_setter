@@ -1,0 +1,14 @@
+{
+  "title": "Paginated List with Bookmarking",
+  "difficulty": "Intermediate",
+  "tags": [
+    "react",
+    "typescript",
+    "pagination",
+    "bookmark",
+    "filtering",
+    "state-management"
+  ],
+  "dependencies": ["react", "typescript"],
+  "author": "Sarath"
+}

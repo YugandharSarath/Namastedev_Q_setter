@@ -1,0 +1,14 @@
+{
+  "title": "Social Share Dialog",
+  "component": "ShareDialogWrapper",
+  "difficulty": "easy",
+  "tags": ["react", "material-ui", "dialog", "icons", "clipboard", "social"],
+  "dependencies": {
+    "@mui/material": "^5.x",
+    "@mui/icons-material": "^5.x",
+    "react": "^18.x",
+    "react-dom": "^18.x"
+  },
+  "descriptionFile": "description.md",
+  "testCasesFile": "test-cases.md"
+}

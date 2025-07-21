@@ -1,0 +1,3 @@
+- Only white pawns assumed
+- Use: `hovered[0]` to determine row
+- Use conditionals to differentiate between forward and diagonal capture

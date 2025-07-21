@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.container {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.logo {
+  text-align: center;
+  color: green;
+}
+
+h2 {
+  text-align: center;
+}
+
+.balance-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel-btn {
+  background: limegreen;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+
+.form input {
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.add-btn {
+  background: limegreen;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.card {
+  border: 1px solid #000;
+  padding: 1rem;
+  width: 48%;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.card.red p {
+  color: red;
+  font-weight: bold;
+}
+
+.card.green p {
+  color: green;
+  font-weight: bold;
+}
+
+.search input {
+  width: 100%;
+  padding: 0.5rem;
+  background: #eee;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: none;
+}
+
+.transaction-list .transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background: #eee;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.remove-btn {
+  background: limegreen;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

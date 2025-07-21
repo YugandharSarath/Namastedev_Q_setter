@@ -1,0 +1,47 @@
+.paginated-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.article-card {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background-color: #fff;
+}
+
+.article-card h3 {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.bookmark {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 20px;
+  transition: color 0.2s;
+}
+
+.bookmark.active {
+  color: gold;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Expense Tracker App using React",
+  "level": "Medium",
+  "language": "ReactJS",
+  "tags": ["React", "JavaScript", "UI", "State Management", "Search", "CRUD"],
+  "description": "Track your budget and expenses with a clean UI. Add, remove, and search transactions with real-time summary updates.",
+  "author": "Sarath"
+}

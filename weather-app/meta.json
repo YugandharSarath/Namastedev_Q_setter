@@ -1,0 +1,23 @@
+{
+  "title": "Weather App",
+  "description": "React + TypeScript weather application using Geolocation and OpenWeatherMap API.",
+  "technologies": [
+    "React",
+    "TypeScript",
+    "OpenWeatherMap",
+    "HTML5 Geolocation"
+  ],
+  "category": "Frontend",
+  "author": "Sarath V",
+  "license": "MIT",
+  "version": "1.0.0",
+  "createdAt": "2025-07-21",
+  "keywords": [
+    "weather",
+    "react",
+    "typescript",
+    "geolocation",
+    "api",
+    "openweathermap"
+  ]
+}

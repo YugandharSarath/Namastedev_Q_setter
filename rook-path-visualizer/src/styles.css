@@ -1,0 +1,31 @@
+/* styles.css */
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  border: 2px solid #333;
+  width: fit-content;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  box-sizing: border-box;
+  transition: background 0.3s;
+}
+
+.light {
+  background-color: #f0d9b5; /* light square */
+}
+
+.dark {
+  background-color: #b58863; /* dark square */
+}
+
+.hovered {
+  background-color: #87cefa; /* light blue */
+}
+
+.rook-move {
+  background-color: #4682b4; /* dark blue */
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Draw Circles with Undo/Redo",
+  "difficulty": "Intermediate",
+  "tags": ["React", "TypeScript", "UI", "Canvas", "Undo/Redo", "Mouse Events"],
+  "language": "TypeScript",
+  "framework": "React",
+  "cssFramework": "None",
+  "dependencies": [],
+  "description": "Build a UI where users can draw circles at mouse click positions, with Undo and Redo functionality using React + TypeScript."
+}

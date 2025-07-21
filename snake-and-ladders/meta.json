@@ -1,0 +1,6 @@
+{
+  "title": "Snakes and Ladders Game",
+  "description": "A React-based mini game where players roll dice to move from 1 to 100 on a board with snakes and ladders.",
+  "tags": ["react", "game", "typescript", "board-game"],
+  "difficulty": "medium"
+}

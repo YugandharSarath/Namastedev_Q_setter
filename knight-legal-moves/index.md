@@ -1,0 +1,3 @@
+- Use data attributes to store row/col.
+- Consider all 8 knight move offsets and filter invalid.
+- `mouseenter` & `mouseleave` are used for hover logic.

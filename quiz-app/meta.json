@@ -1,0 +1,15 @@
+{
+  "title": "Quiz App",
+  "description": "A multiple-choice quiz app built using React functional components and TypeScript.",
+  "technologies": ["React", "TypeScript", "CSS"],
+  "features": [
+    "Multiple-choice questions",
+    "Score tracking",
+    "Restart functionality",
+    "Modular components with type safety"
+  ],
+  "author": "Sarath",
+  "difficulty": "Beginner to Intermediate",
+  "version": "1.0.0",
+  "tags": ["quiz", "typescript", "react", "educational", "learning"]
+}

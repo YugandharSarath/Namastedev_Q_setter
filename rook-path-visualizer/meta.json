@@ -1,0 +1,9 @@
+{
+  "title": "Rook Move Visualizer",
+  "description": "Visualize all the possible moves of a Rook on a standard 8x8 chessboard using React. Highlight the squares the Rook can move to when hovered over.",
+  "difficulty": "Medium",
+  "topics": ["React", "2D Array", "Chessboard", "DOM Events"],
+  "time": "30 mins",
+  "companies": ["Amazon", "Google", "Microsoft"],
+  "defaultCode": "src/App.tsx"
+}

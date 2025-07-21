@@ -1,0 +1,10 @@
+{
+  "title": "Drag and Drop List",
+  "language": "TypeScript",
+  "framework": "React",
+  "difficulty": "Intermediate",
+  "tags": ["react", "typescript", "drag-and-drop", "html5", "frontend", "ui"],
+  "dependencies": [],
+  "entry": "DragAndDropList.tsx",
+  "description": "A drag-and-drop list in React using native HTML5 Drag and Drop API without external libraries."
+}

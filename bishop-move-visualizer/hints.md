@@ -1,0 +1,2 @@
+- A bishop moves diagonally.
+- Use: Math.abs(row1 - row2) === Math.abs(col1 - col2)

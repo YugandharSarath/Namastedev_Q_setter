@@ -1,0 +1,31 @@
+/* App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+.container {
+  width: 400px;
+  margin: 20px auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.item {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.loader {
+  text-align: center;
+  padding: 16px;
+  font-weight: bold;
+  color: #666;
+}
