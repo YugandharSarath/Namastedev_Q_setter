@@ -1,21 +1,65 @@
-# Social Share Dialog Component
+📤 **Social Share Buttons**
 
-Implement a reusable React component that displays a "Share This" button. When clicked, it opens a modal dialog that contains several social media sharing options (LinkedIn, Twitter/X, WhatsApp, Facebook, Telegram, Reddit, Email) and a copy-to-clipboard button for the share link.
+---
 
-## Features
+### 🧠 **Goal**
 
-- Modal dialog using Material-UI (`@mui/material`) components.
-- Icons for each platform using either:
-  - `@mui/icons-material` (for available platforms), or
-  - Custom image/SVG (e.g., for X logo).
-- `navigator.clipboard.writeText` support to copy the share URL.
-- Responsive layout with clean button/icon styling.
-- Custom alt-text and tooltips for accessibility.
-- Uses `https://namaste.dev` as the sample URL and “Check this out!” as share text.
+Build a **reusable "Share This" button** that opens a dialog with **platform icons** to share a webpage, plus a **Copy Link** feature.
 
-## Expected Behavior
+---
 
-- Clicking "Share This" button opens a dialog.
-- User can click any social icon to open share intent in new tab.
-- Clicking "Copy" copies the share link and shows an alert.
+### ✅ **Core Features**
+
+* 🔘 “**Share This**” button opens a modal/dialog
+* 🔗 Share options:
+
+  * LinkedIn (`share-linkedin`)
+  * Twitter/X (`share-twitter`)
+  * WhatsApp (`share-whatsapp`)
+  * Facebook (`share-facebook`)
+  * Telegram (`share-telegram`)
+  * Reddit (`share-reddit`)
+  * Email (`share-email`)
+* 📋 **Copy Link**:
+
+  * Uses `navigator.clipboard.writeText()`
+  * Shows alert on success
+* ❌ Dialog closable via a Close button
+
+---
+
+### 🧪 **Suggested `data-testid`s**
+
+| Element   | `data-testid`                                                                                                          |
+| --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Wrapper   | `share-buttons`                                                                                                        |
+| Buttons   | `share-linkedin`, `share-twitter`, `share-whatsapp`, `share-facebook`, `share-telegram`, `share-reddit`, `share-email` |
+| Copy Link | `copy-link`                                                                                                            |
+
+---
+
+### 📚 **Edge Cases to Handle**
+
+| Case                       | Behavior                                |
+| -------------------------- | --------------------------------------- |
+| 📋 Clipboard not available | Fallback silently or show message       |
+| 🧱 Popup blockers          | `window.open()` may fail silently       |
+| ⚠️ Empty link              | Use fallback or disable share buttons   |
+| 🔁 Repeated clicks         | Toggle dialog without breaking state/UI |
+
+---
+
+### 🧪 **Test Scenarios Summary**
+
+| Test Description               | Validation                                                   |
+| ------------------------------ | ------------------------------------------------------------ |
+| 🔘 Renders “Share This” button | `getByText("Share This")` works                              |
+| 🪟 Dialog opens/closes         | Modal toggles properly with click                            |
+| 📱 All buttons shown           | 7 share buttons appear with correct `data-testid`s           |
+| 📋 Copy link works             | Mocks `navigator.clipboard.writeText()` and triggers alert   |
+| 🔗 Platform URLs               | `window.open` called with correct domain (e.g., twitter.com) |
+
+---
+
+
 

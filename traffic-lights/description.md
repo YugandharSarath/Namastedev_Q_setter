@@ -1,26 +1,63 @@
-# Traffic Light System – React + TypeScript
+🚦 **Traffic Lights Simulation**
 
-## Objective
-Build a simple yet functional **Traffic Light System** using React and TypeScript. The UI simulates a real-world traffic signal with Red, Yellow, and Green lights and cycles between them based on timer intervals.
+---
 
-## Features
-- Traffic lights: Red, Yellow, Green
-- Lights switch in a loop: Red → Green → Yellow → Red
-- Each light shows for a specific duration:
-  - Red: 3 seconds
-  - Green: 3 seconds
-  - Yellow: 1 second
-- Fully functional using React Hooks and TypeScript
-- Basic styling using regular CSS
+### 🧠 **Goal**
 
-## Technologies Used
-- React
-- TypeScript
-- CSS (no frameworks)
-- setTimeout for timing control
+Build a **traffic light simulator** with Red, Yellow, and Green lights. The system can **auto-cycle** (timed) or **manual cycle** (via button). Only **one light** is active at a time.
 
-## How It Works
-1. A state variable keeps track of the current light.
-2. `useEffect` sets up a timer that changes the light based on the active one.
-3. The timer interval updates the state in the correct sequence.
-4. The UI highlights the active light with color.
+---
+
+### ✅ **Core Features**
+
+* 🚦 Lights: Red → Green → Yellow → Red
+* 🕒 **Auto Mode**:
+
+  * Red: 3s
+  * Green: 3s
+  * Yellow: 1s
+* ✋ **Manual Mode**: "Next" button to cycle lights
+* 🔁 Restarts always begin with **Red**
+* ✅ Only one light active at any moment
+
+---
+
+### 🧪 **Testability Aids**
+
+| UI Element   | `data-testid`   |
+| ------------ | --------------- |
+| Red Light    | `light-red`     |
+| Yellow Light | `light-yellow`  |
+| Green Light  | `light-green`   |
+| Container    | `traffic-light` |
+| Next Button  | `next-button`   |
+
+🧪 **Tests Use**:
+
+* `jest.useFakeTimers()`
+* `jest.advanceTimersByTime()`
+* `.toHaveClass("on")` to check active light
+
+---
+
+### 📚 **Edge Cases Handled**
+
+* Infinite auto-cycling without crash
+* Manual mode must not auto-advance
+* Always starts from Red
+* Only one `.on` light at any point
+
+---
+
+### 🧪 **Sample Test Cases**
+
+| Test               | Outcome                                   |
+| ------------------ | ----------------------------------------- |
+| 🟥 Initial State   | Red is active                             |
+| 🟩 3s → Green      | Green active after 3s                     |
+| 🟡 Full Cycle      | Red → Green → Yellow → Red works properly |
+| 🔁 Two Loops       | Sequence repeats correctly                |
+| 💡 Visual Feedback | Only one light has `.on` class at a time  |
+
+---
+

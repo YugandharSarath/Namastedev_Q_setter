@@ -1,29 +1,60 @@
-# Drag and Drop List (React + TypeScript)
+⬆️ **Drag and Drop List**
 
-This project implements a simple drag-and-drop list using React and TypeScript without any external libraries. It uses the native HTML5 Drag and Drop API to allow users to reorder list items by dragging and dropping.
+---
 
-## Features
+### 🧠 **Goal**
 
-- Built with React and TypeScript
-- Supports native drag-and-drop using HTML5 API
-- Allows dynamic reordering of list items
-- Optimized with minimal re-renders
-- Clean and responsive UI
+Build a simple **Kanban-style task manager** using React **without external libraries**, where users can drag tasks across three columns — **To Do**, **In Progress**, and **Done**.
 
-## How it works
+---
 
-- Users can drag a list item and drop it at a new position.
-- The list updates immediately upon drop.
-- State is updated only when the drop event occurs.
+### ✅ **Core Features**
 
-## Technologies Used
+* 🗂️ Three Columns: *To Do*, *In Progress*, *Done*
+* 🖱️ Drag-and-drop support using **HTML5 API**
+* 🔄 State updates instantly after drop
+* 🎨 Visual feedback while dragging
+* ♿ Accessible headings for screen readers
 
-- React (Functional Components)
-- TypeScript
-- HTML5 Drag and Drop API
+---
 
-## Setup
+### ⚙️ **UI Identifiers for Testing**
 
-1. Clone the project or copy the code into a new React + TypeScript project.
-2. Use the `DragAndDropList.tsx` component in your app.
-3. No additional libraries required.
+| Element        | data-testid               |
+| -------------- | ------------------------- |
+| List container | `draggable-list`          |
+| Task item      | `draggable-item-${index}` |
+
+---
+
+### 🧪 **Test Case Coverage**
+
+| Test Case                | What It Checks                                                      |
+| ------------------------ | ------------------------------------------------------------------- |
+| ✅ Initial render         | All default tasks and columns are present                           |
+| ✅ Drag to another column | Moves task to target column and updates state                       |
+| ✅ Drop in same column    | No UI/state change if task dropped where it started                 |
+| ✅ Drop outside columns   | Drop fails safely, UI doesn't break                                 |
+| ✅ Multiple drags         | Tasks can move across columns multiple times                        |
+| ✅ Accessibility          | Column headers support assistive technologies (e.g. screen readers) |
+
+---
+
+### ⚠️ **Edge Cases**
+
+* Dropping in same column → No change
+* Only one task in a column → Still draggable
+* Moving task back and forth works without glitches
+
+---
+
+### 🧰 **Technologies Used**
+
+* React (Hooks, Functional Components)
+* Native HTML5 Drag-and-Drop
+* @testing-library/react for testing
+
+---
+
+
+

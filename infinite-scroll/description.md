@@ -1,26 +1,68 @@
-# Infinite Scroll
-
-Build a component that displays a list of items and loads more items automatically when the user scrolls near the bottom of the page.
-
-## Requirements
-
-- Initial load: Display the first batch of items (e.g., 10).
-- Scroll Detection: When the user reaches the bottom, load the next batch.
-- Continue until all items are loaded.
-- Show a loader/spinner while new items are loading.
-- Add a message like “You’ve reached the end” when no more items remain.
-
-## Constraints
-
-- You must not load all data at once.
-- Use mock API (or simulate delay using `setTimeout`).
-- Use intersection observer or scroll listener.
 
 ---
 
-## Bonus
+## 🌀 Infinite Scroll List – Problem Statement
 
-- Add debounce/throttle to scroll handler.
-- Support window resizing.
-- Load images or cards instead of plain text.
+### 🧠 Goal
+
+Create a scrollable list that **automatically loads more items** as the user scrolls down — **no buttons or pagination**.
+
+---
+
+### ✅ Features
+
+* 📄 Loads data in small chunks (e.g. 10 at a time)
+* 🔄 Auto-loads when nearing the bottom using `IntersectionObserver`
+* ⏳ Shows a loading spinner while fetching
+* 🛑 Displays “You’ve reached the end” when no more data
+* 🚫 Prevents duplicate requests during fast scrolling
+
+---
+
+### 🧪 What to Test
+
+| Test Case              | Description                                 |
+| ---------------------- | ------------------------------------------- |
+| ✅ Initial Load         | Renders first 10 items on mount             |
+| ✅ Observer Trigger     | Scrolls → triggers next set (11–20)         |
+| ✅ Reaches End          | Shows end message when no more data         |
+| ✅ No Duplicate Fetches | Fast scroll doesn’t call API multiple times |
+
+---
+
+### 🧪 Testing Tips
+
+* Use `IntersectionObserver` mock to simulate scroll
+* Fake timers for delayed fetches
+* Example:
+
+  ```js
+  triggerIntersection(screen.getByTestId('loader-ref'));
+  jest.runAllTimers();
+  expect(await screen.findByText('Item 11')).toBeInTheDocument();
+  ```
+
+---
+
+### 📚 Edge Cases
+
+| Edge Case          | Expected Behavior                      |
+| ------------------ | -------------------------------------- |
+| 🛑 No More Data    | Show "You've reached the end"          |
+| ⚡ Fast Scroll      | No extra/double fetch calls            |
+| 🌐 Network Failure | Optionally show retry or error message |
+
+---
+
+### 🏷️ Suggested Test IDs
+
+| Element      | Test ID              |
+| ------------ | -------------------- |
+| Loader div   | `loader-ref`         |
+| List item    | `list-item-${index}` |
+| Loading text | `loading-indicator`  |
+| End message  | `end-message`        |
+
+---
+
 

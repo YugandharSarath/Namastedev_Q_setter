@@ -1,38 +1,83 @@
-## Expense Tracker – ReactJS Project
 
-Create a modern and user-friendly Expense Tracker application using React. The application should allow users to track their income and expenses, calculate balance, and categorize transactions as either “Budget” or “Expense”.
+---
 
-### Requirements:
+## 💰 Expense Tracker 
 
-- Input fields for amount and description.
-- Radio buttons to select if it’s a “Budget” or “Expense”.
-- A summary section to show:
-  - Total Balance
-  - Total Expense
-  - Total Budget
-- A transaction list with the ability to:
-  - Filter/search transactions by description.
-  - Remove any transaction.
-- A modern UI as per the provided design with proper colors, spacing, and layout.
+### 🧠 **Problem Statement**
 
-### Functionalities:
+Create a simple personal finance tracker where users can:
 
-1. **Add Transaction**
-   - Add amount with description.
-   - Select type: Budget or Expense.
-2. **Cancel Button**
-   - Resets the input form.
-3. **Display Summary**
-   - Balance = Budget - Expense
-   - Expense total in red.
-   - Budget total in green.
-4. **Transaction List**
-   - Show each transaction with amount, type, and remove button.
-5. **Search Bar**
-   - Real-time filtering by description.
+* Add income or expense entries
+* See their current balance, total income, and expenses
+* View and delete transactions
+* Search transactions by name
 
-### Technologies:
+---
 
-- React
-- TypeScript (optional)
-- CSS for styling
+### ✅ **Core Features**
+
+* 📝 **Add Transaction**:
+
+  * Inputs: Title + Amount
+  * Type: Income / Expense
+
+* 📊 **Summary Section**:
+
+  * Shows current **Balance**, **Income**, and **Expense**
+
+* 📜 **Transaction List**:
+
+  * Displays added transactions
+  * Each item has a **Delete** button
+
+* 🔍 **Search Bar**:
+
+  * Filters transaction list by text
+
+* ❌ **Cancel Button**:
+
+  * Clears form fields
+
+---
+
+### 📚 **Edge Cases to Handle**
+
+| Edge Case              | Expected Behavior                                 |
+| ---------------------- | ------------------------------------------------- |
+| Add 0 amount           | Should be ignored or show validation error        |
+| Negative/decimal input | Validate or convert appropriately                 |
+| Delete transaction     | Updates list and recalculates balance + summaries |
+| Partial search match   | Filters transaction list using substring match    |
+
+---
+
+### 🧪 **Test Coverage Summary**
+
+| ✅ Test Case                   | 💬 Description                                                    |
+| ----------------------------- | ----------------------------------------------------------------- |
+| Renders headings and balance  | UI shows main titles, balance, and form controls                  |
+| Adds income, updates summary  | Adds income and updates transaction list + balance/income section |
+| Adds expense, updates summary | Adds expense and updates list + expense/balance summary           |
+| Deletes a transaction         | Removes item and recalculates balance                             |
+| Cancels clears form           | Clicking Cancel clears title and amount input fields              |
+| Filters by search             | Filters list based on entered description                         |
+
+---
+
+### 🏷️ **`data-testid`s**
+
+| Element              | `data-testid`      |
+| -------------------- | ------------------ |
+| Title Input          | `title-input`      |
+| Amount Input         | `amount-input`     |
+| Add Button           | `add-button`       |
+| Cancel Button        | `cancel-button`    |
+| Delete Button (each) | `delete-btn-${id}` |
+| Balance Display      | `balance`          |
+| Income Summary       | `income-summary`   |
+| Expense Summary      | `expense-summary`  |
+| Transaction List     | `transaction-list` |
+| Search Input         | `search-input`     |
+
+---
+

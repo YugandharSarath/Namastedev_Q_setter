@@ -1,31 +1,75 @@
-# Quiz App – Overview
-
-This is a simple and interactive Quiz App built using **React** with **TypeScript**. The app presents users with a series of multiple-choice questions and calculates their score based on correct answers.
 
 ---
 
-## 🎯 Key Objectives
-- Learn how to use React functional components with hooks
-- Practice state management in React
-- Use TypeScript to enforce type safety
-- Organize a modular component structure
+## ❓ Quiz App 
+
+### 🧠 Goal
+
+Create an interactive quiz where users answer **MCQs one-by-one**, get their **final score**, and can **restart** the quiz.
 
 ---
 
-## 🧱 App Structure
-- **App.tsx** – Root component, handles the quiz logic
-- **Question.tsx** – Displays the current question and handles form submit
-- **Options.tsx** – Renders radio button options
-- **Score.tsx** – Displays final score and restart option
-- **qBank.ts** – Stores the array of questions
-- **types/index.ts** – Contains the TypeScript type definition
-- **styles.css** – Minimal styling
+### ✅ Features
+
+* 🧾 One question at a time
+* 🔘 Options shown as radio buttons
+* 🧮 Final score display after last question
+* 🔄 “Play Again” resets entire quiz
+* 🚫 Prevents submission if no option is selected
 
 ---
 
-## 🚀 Use Cases
-- Educational quizzes for school or practice
-- Onboarding questions in a job application
-- Trivia games
+### 📚 Edge Case Handling
 
-This project is intentionally kept simple and extendable for learners and hobby developers.
+| Scenario                    | Expected Behavior                                |
+| --------------------------- | ------------------------------------------------ |
+| ❌ No questions              | Show message like “No quiz available”            |
+| 🚫 Submit without selection | Block progression until an option is chosen      |
+| 🔁 Play again               | Reset score, current index, and selected answers |
+| 🔘 Radio selection          | Only one option selectable per question          |
+
+---
+
+### 🧪 Testing with RTL
+
+Simulate real interactions:
+
+```tsx
+fireEvent.click(screen.getByLabelText('Option A'));
+fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+expect(screen.getByTestId('score')).toBeInTheDocument();
+```
+
+#### ✅ Suggested Test Cases
+
+* Initial UI renders first question
+* Selecting an option enables submission
+* Correct/Incorrect selections affect score
+* Final score shown after last question
+* Restart button resets state properly
+
+---
+
+### 🏷️ Suggested Test IDs
+
+| Element        | `data-testid`    |
+| -------------- | ---------------- |
+| Question text  | `question`       |
+| Option A       | `option-A`       |
+| Option B       | `option-B`       |
+| Option C       | `option-C`       |
+| Option D       | `option-D`       |
+| Final score    | `score`          |
+| Restart button | `restart-button` |
+
+---
+
+### 💡 Bonus Features (Optional)
+
+* ⏱ Timer for each question
+* 🔄 Load questions from Open Trivia DB
+* 🧠 Add categories or difficulty filters
+
+---
+
+
