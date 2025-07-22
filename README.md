@@ -41,7 +41,7 @@ Each project demonstrates a specific concept, UI behavior, or algorithm visualiz
 
 ---
 
-## 📚 Learning Projects
+## 📚 Other Projects
 
 * ❓ [Quiz App](https://codesandbox.io/p/github/YugandharSarath/quiz_app/main)
 * 🌦️ [Weather App](https://codesandbox.io/p/github/YugandharSarath/weather_app/main)
