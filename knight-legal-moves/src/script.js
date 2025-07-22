@@ -1,5 +1,7 @@
+import { getKnightMoves } from './knight.js';
+
 const board = document.getElementById("board");
-const { getKnightMoves } = require("./knight");
+
 
 function createBoard() {
   for (let row = 0; row < 8; row++) {

@@ -1,4 +1,4 @@
-function getKnightMoves(row, col) {
+export function getKnightMoves(row, col) {
   if (row < 0 || row > 7 || col < 0 || col > 7) return [];
   const moves = [
     [2, 1],
