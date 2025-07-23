@@ -1,0 +1,4 @@
+- Use `IntersectionObserver` to detect when the bottom loader enters the viewport.
+- Use `useState` and `useEffect` to manage list updates.
+- Debounce or gate fetches with a `loading` flag to prevent multiple concurrent fetches.
+- Limit list size and simulate API latency with `setTimeout`.

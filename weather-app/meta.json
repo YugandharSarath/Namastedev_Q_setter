@@ -19,5 +19,14 @@
     "geolocation",
     "api",
     "openweathermap"
-  ]
+  ],
+  "companies": [
+  "AccuWeather",
+  "Google",
+  "Apple",
+  "Yahoo",
+  "The Weather Channel"
+],
+"duration": "35-45 minutes"
+
 }

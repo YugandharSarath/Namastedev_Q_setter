@@ -13,5 +13,7 @@
   "author": "Sarath",
   "starterFiles": ["App.tsx", "mockFetch.ts"],
   "solutionFile": "solution.tsx",
-  "testCasesFile": "test-cases.md"
+  "testCasesFile": "test-cases.md",
+  "companies": ["Facebook", "Pinterest", "Instagram", "LinkedIn", "Twitter"],
+  "time": "25–30 minutes"
 }

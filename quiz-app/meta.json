@@ -11,5 +11,7 @@
   "author": "Sarath",
   "difficulty": "Beginner to Intermediate",
   "version": "1.0.0",
-  "tags": ["quiz", "typescript", "react", "educational", "learning"]
+  "tags": ["quiz", "typescript", "react", "educational", "learning"],
+  "companies": ["Meta ", "Reddit", "HackerNews", "Disqus"],
+  "duration": "35 minutes"
 }

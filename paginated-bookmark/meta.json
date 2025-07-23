@@ -10,5 +10,7 @@
     "state-management"
   ],
   "dependencies": ["react", "typescript"],
-  "author": "Sarath"
+  "author": "Sarath", 
+  "companies": ["Flipkart", "Razorpay", "Swiggy", "Zomato "], 
+  "time": "45–60 minutes"
 }

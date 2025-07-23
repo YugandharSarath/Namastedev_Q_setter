@@ -6,5 +6,7 @@
   "tags": ["react", "typescript", "drag-and-drop", "html5", "frontend", "ui"],
   "dependencies": [],
   "entry": "DragAndDropList.tsx",
-  "description": "A drag-and-drop list in React using native HTML5 Drag and Drop API without external libraries."
+  "description": "A drag-and-drop list in React using native HTML5 Drag and Drop API without external libraries.",
+  "companies": ["Atlassian", "Jira", "Monday.com"],
+  "Time": "45-60 min"
 }

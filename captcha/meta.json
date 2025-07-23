@@ -17,5 +17,7 @@
     "react-component",
     "frontend",
     "typescript"
-  ]
+  ],
+  "companies": ["Zoho", "Freshworks", "BrowserStack", "Frontend Entry Interviews"],
+  "duration": "15–20 min"
 }

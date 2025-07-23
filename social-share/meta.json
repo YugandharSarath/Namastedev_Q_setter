@@ -10,5 +10,7 @@
     "react-dom": "^18.x"
   },
   "descriptionFile": "description.md",
-  "testCasesFile": "test-cases.md"
+  "testCasesFile": "test-cases.md",
+  "companies": ["LinkedIn", "Meta", "Twitter", "Reddit"],
+  "time": "20 minutes"
 }
