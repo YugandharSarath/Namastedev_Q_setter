@@ -11,10 +11,10 @@ function getRandomHexColor() {
   );
 }
 
-export default function App() {
-  const [colors, setColors] = useState<string[]>([]);
-  const [answer, setAnswer] = useState<string>("");
-  const [selected, setSelected] = useState<string | null>(null);
+export default function ColorGame() {
+  const [colors, setColors] = useState([]);
+  const [answer, setAnswer] = useState("");
+  const [selected, setSelected] = useState(null);
 
   const generateGame = () => {
     const correctColor = getRandomHexColor();
@@ -28,8 +28,7 @@ export default function App() {
     setSelected(null);
   };
 
-  const shuffleArray = (arr: string[]) =>
-    [...arr].sort(() => Math.random() - 0.5);
+  const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
   useEffect(() => {
     generateGame();
@@ -43,7 +42,7 @@ export default function App() {
           <div
             key={color}
             className="color-box"
-            style={{ backgroundColor: color, cursor: 'pointer' }}
+            style={{ backgroundColor: color, cursor: "pointer" }}
             onClick={() => setSelected(color)}
             role="button"
             tabIndex={0}
