@@ -22,7 +22,7 @@ Each project demonstrates a specific concept, UI behavior, or algorithm visualiz
 * 🎲 [Snake and Ladders Game](https://codesandbox.io/p/github/YugandharSarath/snake_and_ladders/main)
 * 🎨 [Color Code Guessing Game](https://codesandbox.io/p/github/YugandharSarath/color-code-game/main)
 * 🔢 [Captcha Generator](https://codesandbox.io/p/github/YugandharSarath/captcha/main)
-
+* 🔳 [Sudoku Game](https://codesandbox.io/p/github/YugandharSarath/sudoku/main)
 
 ---
 
