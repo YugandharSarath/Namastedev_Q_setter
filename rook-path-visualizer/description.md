@@ -5,37 +5,37 @@
 
 ### 🎯 **Goal**
 
-Build a React app that displays an **8×8 chessboard**.
+Build a React component that displays an **8×8 chessboard**.
 When a user **hovers** over any square, highlight all squares in the **same row and same column** – just like a **Rook** moves in chess.
 
 ---
 
 ### ✅ **Requirements**
 
-* Render an **8×8 grid** that looks like a chessboard.
-* Each square (cell) must:
+* Render an **8×8 chessboard** (total 64 cells).
+* Each cell must:
 
-  * Be rendered with appropriate accessibility roles.
-  * Respond to **mouse hover (`onMouseEnter`)**.
-* On hover over any cell:
+  * Use `role="gridcell"` for accessibility.
+  * Respond to **hover** using `onMouseEnter` and `onMouseLeave`.
+* On hover over a cell:
 
-  * Highlight all cells in the **same row**.
-  * Highlight all cells in the **same column**.
-  * (Optional) You may exclude the hovered cell from the highlight.
-* When the user **stops hovering** (i.e. `onMouseLeave`), all highlights must disappear.
-* On **initial load**, no cells should be highlighted.
+  * Highlight all squares in the **same row**.
+  * Highlight all squares in the **same column**.
+  * Optionally **exclude the hovered cell** from highlights.
+* Clear highlights when hover ends (i.e., on `onMouseLeave`).
+* On **initial load**, no cell should be highlighted.
 
 ---
 
 ### ⚠️ **Edge Cases & Constraints**
 
-* 🟪 **Corner cells** (like A1 or H8) must also highlight the correct row and column.
-* ✅ Ensure there are **exactly 64 grid cells** (8 rows × 8 columns).
-* 🟫 Highlights must update **in real-time** as the user moves the mouse across different squares.
-* 🟨 If required, do **not highlight** the hovered cell itself (based on your design or test logic).
-* 🔄 **No persistent state** — highlights are purely based on the current hover.
+* 🟪 **Corner cells** (like A1 or H8) must highlight both their entire row and column.
+* 🟦 A **center cell** (e.g., D4) should correctly highlight all cells in the same row and column.
+* 🟨 If the design requires, avoid highlighting the hovered cell itself.
+* 🔄 The highlights must **update in real time** as the mouse moves across the board.
+* 🧠 Hover logic should rely only on current interaction – no need for complex state or memory.
+* ✅ Ensure **exactly 64 grid cells** are rendered.
 
 ---
-
 
 

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const boardSize = 8;
 
-export default function PawnBoard({ hovered, setHovered }) {
+export default function PawnBoard() {
+  const [hovered, setHovered] = useState(null);
+
   return (
     <div className="board">
-      {}
       {Array.from({ length: boardSize }).map((_, row) =>
         Array.from({ length: boardSize }).map((_, col) => {
           const isHovered = hovered && hovered[0] === row && hovered[1] === col;

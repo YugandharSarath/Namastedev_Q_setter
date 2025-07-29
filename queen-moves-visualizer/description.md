@@ -1,6 +1,3 @@
-You're right! Let's add a clearly separated **"⚠️ Edge Cases & Constraints"** section — aligned with your updated Pawn and Bishop prompts.
-
-Here’s the **final improved version** of your **Queen Move Visualizer prompt**, now including **constraints**, cleaner structure, and no inline code snippets (as per Himanshi’s feedback):
 
 ---
 
@@ -8,36 +5,35 @@ Here’s the **final improved version** of your **Queen Move Visualizer prompt**
 
 ### 👨‍🎓 Problem Statement
 
-Build a simple React app that shows a chessboard. When the user **clicks on a square**, highlight all valid **Queen moves** starting from that position.
+Build a simple React app that displays a chessboard. When the user **clicks on a square**, highlight all valid moves a **Queen** can make from that position.
 
 ---
 
 ### ✅ Requirements
 
-1. **Create an 8×8 chessboard** (64 squares in total).
-2. Make each square **clickable** (to represent the Queen's current position).
+1. Render a standard **8×8 chessboard** (64 cells total).
+2. Each square must be **clickable**.
 3. When a square is clicked:
 
-   * Highlight all legal Queen moves:
+   * Highlight all valid **Queen moves**:
 
-     * Horizontally (same row)
-     * Vertically (same column)
+     * Horizontally (entire row)
+     * Vertically (entire column)
      * Diagonally (all 4 directions)
-   * The clicked cell itself must **not** be highlighted.
-4. **Clear previous highlights** when another square is clicked.
-5. On initial load, **no highlights should be shown**.
+   * Do **not** highlight the selected square itself.
+4. When a different square is clicked, **clear previous highlights** and show only the new valid moves.
+5. On initial load, no cells should be highlighted.
 
 ---
 
 ### ⚠️ Edge Cases & Constraints
 
-| Case                             | What Should Happen                                                |
-| -------------------------------- | ----------------------------------------------------------------- |
-| Click corner cells (A1, H8, etc) | Highlight all valid horizontal, vertical, and diagonal paths      |
-| Click same cell again            | Reset all highlights (toggle off)                                 |
-| Click any cell on the board      | Exactly 27 cells must be highlighted (excluding the clicked cell) |
-| Highlight limit                  | Only **one selection set** may be active at a time                |
-| Board rendering                  | Must always render **exactly 64 cells** (8x8 grid)                |
-| Invalid directions               | No knight, king, or other-piece-like moves should be shown        |
+* If the user clicks on a **corner square** like A1 or H8, the Queen should still show all valid horizontal, vertical, and diagonal moves from that edge position.
+* If the user **clicks the same square again**, all highlighted moves must be cleared (i.e., toggle off).
+* Clicking on any square should **highlight exactly 27 other cells** — covering all directions (excluding the clicked square).
+* Only one square can be **selected at a time** — a new click should replace the previous selection.
+* The app must always render a proper **8×8 grid (64 cells)**, regardless of selection.
+* The highlighted cells must represent **only Queen’s legal movements** — no Knight, King, or other-piece logic should be shown.
 
+---
 
