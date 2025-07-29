@@ -1,63 +1,45 @@
-📤 **Social Share Buttons**
 
 ---
 
-### 🧠 **Goal**
-
-Build a **reusable "Share This" button** that opens a dialog with **platform icons** to share a webpage, plus a **Copy Link** feature.
+## 🔗 **Social Share Dialog Component**
 
 ---
 
-### ✅ **Core Features**
+### 🎯 **Goal**
 
-* 🔘 “**Share This**” button opens a modal/dialog
-* 🔗 Share options:
-
-  * LinkedIn (`share-linkedin`)
-  * Twitter/X (`share-twitter`)
-  * WhatsApp (`share-whatsapp`)
-  * Facebook (`share-facebook`)
-  * Telegram (`share-telegram`)
-  * Reddit (`share-reddit`)
-  * Email (`share-email`)
-* 📋 **Copy Link**:
-
-  * Uses `navigator.clipboard.writeText()`
-  * Shows alert on success
-* ❌ Dialog closable via a Close button
+Build a **social sharing dialog** in React that allows users to share a link (`https://namaste.dev`) via various platforms. Users should also be able to **copy the link** to clipboard. The share options should be accessible in a **popup dialog**, which can be opened and closed from a button.
 
 ---
 
-### 🧪 **Suggested `data-testid`s**
+### ✅ **Functional Requirements**
 
-| Element   | `data-testid`                                                                                                          |
-| --------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Wrapper   | `share-buttons`                                                                                                        |
-| Buttons   | `share-linkedin`, `share-twitter`, `share-whatsapp`, `share-facebook`, `share-telegram`, `share-reddit`, `share-email` |
-| Copy Link | `copy-link`                                                                                                            |
+* 👆 A **"Share This"** button should open a modal dialog.
+* 📤 Inside the modal:
+
+  * Display **icons** for sharing via:
+
+    * LinkedIn
+    * X (Twitter)
+    * WhatsApp
+    * Facebook
+    * Telegram
+    * Reddit
+    * Email
+  * Show a **"Copy"** button to copy the URL.
+* 🧾 Dialog has a **Close (X)** button.
+* 🔗 Clicking any icon should open the respective platform's share URL in a new tab.
+* 📝 Copy to clipboard should trigger an **alert** once copied successfully.
 
 ---
 
-### 📚 **Edge Cases to Handle**
 
-| Case                       | Behavior                                |
-| -------------------------- | --------------------------------------- |
-| 📋 Clipboard not available | Fallback silently or show message       |
-| 🧱 Popup blockers          | `window.open()` may fail silently       |
-| ⚠️ Empty link              | Use fallback or disable share buttons   |
-| 🔁 Repeated clicks         | Toggle dialog without breaking state/UI |
+### ⚠️ **Edge Cases & Constraints**
 
----
-
-### 🧪 **Test Scenarios Summary**
-
-| Test Description               | Validation                                                   |
-| ------------------------------ | ------------------------------------------------------------ |
-| 🔘 Renders “Share This” button | `getByText("Share This")` works                              |
-| 🪟 Dialog opens/closes         | Modal toggles properly with click                            |
-| 📱 All buttons shown           | 7 share buttons appear with correct `data-testid`s           |
-| 📋 Copy link works             | Mocks `navigator.clipboard.writeText()` and triggers alert   |
-| 🔗 Platform URLs               | `window.open` called with correct domain (e.g., twitter.com) |
+* Dialog should not remain open after clicking **Close**.
+* Copy should handle failure gracefully (log error).
+* Clipboard API must work in browsers that support it.
+* `window.alert` should confirm the link was copied.
+* Modal should have proper ARIA roles (e.g., `aria-label="Close"`).
 
 ---
 

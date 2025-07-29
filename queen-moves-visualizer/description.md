@@ -1,54 +1,43 @@
+You're right! Let's add a clearly separated **"⚠️ Edge Cases & Constraints"** section — aligned with your updated Pawn and Bishop prompts.
+
+Here’s the **final improved version** of your **Queen Move Visualizer prompt**, now including **constraints**, cleaner structure, and no inline code snippets (as per Himanshi’s feedback):
 
 ---
 
- **👑 Queen Move Visualizer** 
+## 👑 Queen Move Visualizer
 
-### ✅ **Requirements (What You Need to Build)**
+### 👨‍🎓 Problem Statement
 
-You're building an interactive 8×8 chessboard in React. When a user clicks any square:
-
-* ✅ Highlight all **legal Queen moves**:
-
-  * Horizontally (same row)
-  * Vertically (same column)
-  * Diagonally (all 4 directions)
-* ✅ Remove any previous highlights before showing new ones.
-* ✅ When the app loads, **no cells are highlighted**.
+Build a simple React app that shows a chessboard. When the user **clicks on a square**, highlight all valid **Queen moves** starting from that position.
 
 ---
 
-### ⚠️ **Edge Cases & Constraints**
+### ✅ Requirements
 
-* 🟨 **Edge Cells**: Like corners (A1, H8) must still highlight correct directions.
-* 🔁 **Only One Highlight Set at a Time**: Clicking a new square clears the old highlights.
-* 🧮 **Exactly 64 Squares**: Your board should always render 8×8 = **64 cells**.
-* 🟦 **Exclude Self**: Don’t highlight the clicked cell (Queen can't capture herself 😉).
+1. **Create an 8×8 chessboard** (64 squares in total).
+2. Make each square **clickable** (to represent the Queen's current position).
+3. When a square is clicked:
 
----
+   * Highlight all legal Queen moves:
 
-### 🧪 **Testing Attributes (Roles & Data Test IDs)**
-
-These **must** be used for accessibility and automated testing:
-
-| Element          | `role`     | `data-testid`            |
-| ---------------- | ---------- | ------------------------ |
-| Full Board       | `grid`     | `queen-board`            |
-| Each Row         | `row`      | `grid-row`               |
-| Each Square      | `gridcell` | `grid-cell`              |
-| Highlighted Cell | (same)     | `highlighted` (optional) |
+     * Horizontally (same row)
+     * Vertically (same column)
+     * Diagonally (all 4 directions)
+   * The clicked cell itself must **not** be highlighted.
+4. **Clear previous highlights** when another square is clicked.
+5. On initial load, **no highlights should be shown**.
 
 ---
 
-### 🔍 Example Test Scenario
+### ⚠️ Edge Cases & Constraints
 
-If the user clicks on **D4** (3rd row, 3rd column):
+| Case                             | What Should Happen                                                |
+| -------------------------------- | ----------------------------------------------------------------- |
+| Click corner cells (A1, H8, etc) | Highlight all valid horizontal, vertical, and diagonal paths      |
+| Click same cell again            | Reset all highlights (toggle off)                                 |
+| Click any cell on the board      | Exactly 27 cells must be highlighted (excluding the clicked cell) |
+| Highlight limit                  | Only **one selection set** may be active at a time                |
+| Board rendering                  | Must always render **exactly 64 cells** (8x8 grid)                |
+| Invalid directions               | No knight, king, or other-piece-like moves should be shown        |
 
-* Highlight:
-
-  * All squares in **row D**.
-  * All squares in **column 4**.
-  * All **diagonals** passing through D4.
-* ⚠️ Expected number of highlights: **27 squares** (excluding the clicked cell).
-
----
 

@@ -1,68 +1,32 @@
 
 ---
 
-## 🌀 Infinite Scroll List – Problem Statement
+## 🌀 Infinite Scroll List
 
-### 🧠 Goal
+### 🧠 **Problem Statement**
 
-Create a scrollable list that **automatically loads more items** as the user scrolls down — **no buttons or pagination**.
-
----
-
-### ✅ Features
-
-* 📄 Loads data in small chunks (e.g. 10 at a time)
-* 🔄 Auto-loads when nearing the bottom using `IntersectionObserver`
-* ⏳ Shows a loading spinner while fetching
-* 🛑 Displays “You’ve reached the end” when no more data
-* 🚫 Prevents duplicate requests during fast scrolling
+Build a scrollable UI that **automatically loads more items** when the user reaches the bottom of the list — using `IntersectionObserver`. No manual buttons or pagination should be involved.
 
 ---
 
-### 🧪 What to Test
+### ✅ **Requirements**
 
-| Test Case              | Description                                 |
-| ---------------------- | ------------------------------------------- |
-| ✅ Initial Load         | Renders first 10 items on mount             |
-| ✅ Observer Trigger     | Scrolls → triggers next set (11–20)         |
-| ✅ Reaches End          | Shows end message when no more data         |
-| ✅ No Duplicate Fetches | Fast scroll doesn’t call API multiple times |
-
----
-
-### 🧪 Testing Tips
-
-* Use `IntersectionObserver` mock to simulate scroll
-* Fake timers for delayed fetches
-* Example:
-
-  ```js
-  triggerIntersection(screen.getByTestId('loader-ref'));
-  jest.runAllTimers();
-  expect(await screen.findByText('Item 11')).toBeInTheDocument();
-  ```
+* Display a list of items in chunks (e.g., 10 at a time)
+* Use `IntersectionObserver` to detect when the loader enters view
+* Load the next batch of items automatically
+* Show a **loading indicator** when fetching new items
+* Display a **“You’ve reached the end”** message when all items are loaded
+* Avoid redundant or duplicate fetches during fast or repeated scrolling
 
 ---
 
-### 📚 Edge Cases
+### 📚 **Edge Cases & Constraints (in brief lines)**
 
-| Edge Case          | Expected Behavior                      |
-| ------------------ | -------------------------------------- |
-| 🛑 No More Data    | Show "You've reached the end"          |
-| ⚡ Fast Scroll      | No extra/double fetch calls            |
-| 🌐 Network Failure | Optionally show retry or error message |
+* ⚡ Rapid scroll should trigger **only one fetch at a time**, no duplicate requests.
+* 🧱 If `IntersectionObserver` triggers **after all data is loaded**, show end message and **don’t fetch more**.
+* 🔁 Scrolling up and back down should **not re-fetch** already loaded items.
+* 📉 On slow networks, **loader must show** clearly during fetch delay.
+* ❌ (Optional) If the network fails, **handle silently or show an error/fallback**.
 
----
-
-### 🏷️ Suggested Test IDs
-
-| Element      | Test ID              |
-| ------------ | -------------------- |
-| Loader div   | `loader-ref`         |
-| List item    | `list-item-${index}` |
-| Loading text | `loading-indicator`  |
-| End message  | `end-message`        |
-
----
 
 

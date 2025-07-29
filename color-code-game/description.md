@@ -1,56 +1,52 @@
-🎨 **Color Code Guessing Game**
 
 ---
 
-🧠 **Your Goal**
-Create a fun React-based color guessing game! The player sees a color code like `rgb(255, 0, 0)` and has to pick the correct color box out of a few similar-looking options.
+## 🎨 **Color Code Guessing Game **
 
 ---
 
-🔧 **What to Build**
+### ✅ **Requirements**
 
-1. **🎯 Target Color Display**
+1. **🎯 Display Target Color**
 
-   * Show a big text like `rgb(123, 45, 67)`
-   * `data-testid="target-color"`
+   * Show a heading like: `Which color is #A1B2C3?`
+   * Test ID: `target-color` (heading with color code)
 
-2. **🎨 Color Options**
+2. **🎨 Show 3 Color Boxes**
 
-   * Show 4 to 6 colored boxes
-   * One should exactly match the target color
-   * Others should be similar but incorrect
-   * Use `data-testid="color-option-${i}"` for each box
+   * Render **exactly 3 color boxes**
+   * One box is the correct color
+   * Two others are random but unique incorrect colors
+   * Test ID: `color-option-${i}` for each box
 
-3. **✅ User Feedback**
+3. **🧠 User Selection**
 
-   * If correct box clicked: show 🎉 “Correct!”
-   * If wrong: show ❌ “Try Again!” or hide that box
-   * Use `data-testid="result-message"`
+   * When a color box is clicked:
+
+     * ✅ Show `"🎉 Correct!"` if it's right
+     * ❌ Show `"❌ Incorrect!"` if wrong
+   * Display feedback below
+   * Test ID: `result-message`
 
 4. **🔁 Reset Button**
 
-   * On click, generate a new target color + options
-   * Reset the game state
-   * Use `data-testid="reset-button"`
+   * Appears **after** a guess
+   * Clicking it resets:
+
+     * New color
+     * New options
+     * Clears feedback
+   * Test ID: `reset-button`
 
 ---
 
-💡 **How It Works**
+### ⚠️ **Edge Cases & Constraints**
 
-* Generate a random RGB color.
-* Create a few similar-looking colors as wrong answers.
-* Shuffle all options randomly.
-* Handle correct/wrong click with appropriate messages.
-* Disable clicks after correct guess.
-
----
-
-🧪 **What Can Be Tested**
-
-* `target-color` is visible.
-* Color options are shown.
-* Click on right/wrong color → correct message appears.
-* Click reset → game resets to a fresh round.
+* ✅ Only **3 color options** shown at all times
+* ❌ Duplicate colors are not allowed
+* 🎯 Correct color always included
+* ❌ Don’t allow multiple guesses once one is selected
+* 🌀 Resetting always generates **a new game**, not the same one
 
 ---
 

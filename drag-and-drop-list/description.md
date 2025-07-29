@@ -1,60 +1,52 @@
-⬆️ **Drag and Drop List**
 
 ---
 
-### 🧠 **Goal**
-
-Build a simple **Kanban-style task manager** using React **without external libraries**, where users can drag tasks across three columns — **To Do**, **In Progress**, and **Done**.
+## ⬆️ **Project: Drag and Drop Task Board**
 
 ---
 
-### ✅ **Core Features**
+### ❓ **Question**
 
-* 🗂️ Three Columns: *To Do*, *In Progress*, *Done*
-* 🖱️ Drag-and-drop support using **HTML5 API**
-* 🔄 State updates instantly after drop
-* 🎨 Visual feedback while dragging
-* ♿ Accessible headings for screen readers
+Create a **simple Kanban-style task board** in React (without any external drag libraries), where tasks can be **dragged and dropped** between three columns — **To Do**, **In Progress**, and **Done**. Ensure it works with native HTML5 drag-and-drop and reflects changes immediately.
 
 ---
 
-### ⚙️ **UI Identifiers for Testing**
+### ✅ **Functional Requirements**
 
-| Element        | data-testid               |
-| -------------- | ------------------------- |
-| List container | `draggable-list`          |
-| Task item      | `draggable-item-${index}` |
+1. **Column Setup**
 
----
+   * The UI should have three labeled columns: *To Do*, *In Progress*, and *Done*.
+   * Each column should hold one or more task cards.
 
-### 🧪 **Test Case Coverage**
+2. **Drag and Drop Behavior**
 
-| Test Case                | What It Checks                                                      |
-| ------------------------ | ------------------------------------------------------------------- |
-| ✅ Initial render         | All default tasks and columns are present                           |
-| ✅ Drag to another column | Moves task to target column and updates state                       |
-| ✅ Drop in same column    | No UI/state change if task dropped where it started                 |
-| ✅ Drop outside columns   | Drop fails safely, UI doesn't break                                 |
-| ✅ Multiple drags         | Tasks can move across columns multiple times                        |
-| ✅ Accessibility          | Column headers support assistive technologies (e.g. screen readers) |
+   * Users should be able to drag a task card from one column and drop it into another.
+   * When dropped, the task must be removed from the original column and appended to the new one.
+   * The DOM should reflect the updated structure instantly after drop.
 
----
+3. **State Handling**
 
-### ⚠️ **Edge Cases**
+   * Task movement must be handled via React `useState`.
+   * State should not mutate directly — always create a copy and update appropriately.
 
-* Dropping in same column → No change
-* Only one task in a column → Still draggable
-* Moving task back and forth works without glitches
+4. **Initial Render**
+
+   * The board should render with 4 predefined tasks distributed across the three columns.
+
+5. **Accessibility**
+
+   * Each column must have an accessible `<h3>` heading (used in screen reader validation).
 
 ---
 
-### 🧰 **Technologies Used**
+### ⚠️ **Edge Cases & Constraints**
 
-* React (Hooks, Functional Components)
-* Native HTML5 Drag-and-Drop
-* @testing-library/react for testing
+* **Drop in same column**: Dropping a task back into the same column must not duplicate or move the item.
+* **Drop outside any column**: UI should not crash or misbehave if a task is dragged but not dropped in a valid zone.
+* **Multiple task moves**: Moving tasks multiple times should preserve their order and correct state.
+* **Single task column**: A column with one task should still support dragging and dropping.
+* **Visual Position**: Tasks are always added at the end of the destination column, not reordered internally.
 
 ---
-
 
 

@@ -1,23 +1,38 @@
 {
-  "name": "javascript",
+  "name": "react-typescript",
   "version": "1.0.0",
-  "description": "The JavaScript template",
-  "scripts": {
-    "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html",
-    "test": "jest"
+  "description": "React and TypeScript example starter project",
+  "keywords": [
+    "typescript",
+    "react",
+    "starter"
+  ],
+  "main": "src/index.tsx",
+  "dependencies": {
+    "@testing-library/user-event": "^14.6.1",
+    "loader-utils": "3.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@types/react": "18.2.38",
+    "@types/react-dom": "18.2.15",
     "@types/testing-library__jest-dom": "^5.14.9",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
-    "jest": "^30.0.4",
-    "parcel": "^2.0.0"
+    "typescript": "4.4.4"
   },
-  "keywords": [
-    "css",
-    "javascript"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
   ]
 }

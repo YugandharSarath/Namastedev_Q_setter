@@ -5,63 +5,37 @@
 
 ### 🎯 **Goal**
 
-Build a React app that displays an 8×8 chessboard.
-When a user clicks on any square, highlight all squares in the **same row and column** – just like a **Rook** moves in chess.
+Build a React app that displays an **8×8 chessboard**.
+When a user **hovers** over any square, highlight all squares in the **same row and same column** – just like a **Rook** moves in chess.
 
 ---
 
 ### ✅ **Requirements**
 
-* Render an **8×8 grid** (like a chessboard).
-* Each square (cell) should be **clickable**.
-* When a cell is clicked:
+* Render an **8×8 grid** that looks like a chessboard.
+* Each square (cell) must:
 
-  * Highlight all squares in the **same row**.
-  * Highlight all squares in the **same column**.
-  * (Optional) Do **not** highlight the clicked square itself.
-* A new click should **clear the previous highlights**.
-* On initial load, **no cells should be highlighted**.
+  * Be rendered with appropriate accessibility roles.
+  * Respond to **mouse hover (`onMouseEnter`)**.
+* On hover over any cell:
+
+  * Highlight all cells in the **same row**.
+  * Highlight all cells in the **same column**.
+  * (Optional) You may exclude the hovered cell from the highlight.
+* When the user **stops hovering** (i.e. `onMouseLeave`), all highlights must disappear.
+* On **initial load**, no cells should be highlighted.
 
 ---
 
 ### ⚠️ **Edge Cases & Constraints**
 
-* 🟪 **Corners** like A1, H8, etc. should still highlight correctly.
-* ✅ **Exactly 64 squares** must be rendered (8 rows × 8 columns).
-* 🟫 Only **one selection at a time** — clear previous highlights when a new cell is clicked.
-* 🟨 Highlighting **should not include** the clicked square (if required by design/test).
+* 🟪 **Corner cells** (like A1 or H8) must also highlight the correct row and column.
+* ✅ Ensure there are **exactly 64 grid cells** (8 rows × 8 columns).
+* 🟫 Highlights must update **in real-time** as the user moves the mouse across different squares.
+* 🟨 If required, do **not highlight** the hovered cell itself (based on your design or test logic).
+* 🔄 **No persistent state** — highlights are purely based on the current hover.
 
 ---
 
-### 🔖 **Accessibility & Testability – Use These Attributes**
 
-| Element          | `role`     | `data-testid`            |
-| ---------------- | ---------- | ------------------------ |
-| Full Board       | `grid`     | `rook-board`             |
-| Each Row         | `row`      | `grid-row`               |
-| Each Cell        | `gridcell` | `grid-cell`              |
-| Highlighted Cell | (same)     | `highlighted` (optional) |
-
----
-
-### 🧪 **Example Test Case**
-
-* If a user clicks on **C5**:
-
-  * Highlight all squares in **row 5** and **column C**.
-  * Total highlights: **14 squares** (7 in the row + 7 in the column, excluding the clicked cell).
-  * Previous highlights (if any) should be removed.
-
----
-
-### 💡 **What You’ll Practice**
-
-* React component rendering
-* Grid generation using nested loops or mapping
-* Click event handling
-* Managing state to track highlighted cells
-* ARIA roles & accessibility best practices
-* Understanding chess movement logic (Rook)
-
----
 

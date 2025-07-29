@@ -1,6 +1,8 @@
-### 💡 Hints
+### 💡 **Hints**
 
-- Use `onClick` handler on the canvas to get mouse coordinates.
-- Store drawn circles in a `useState` array.
-- Use another array to manage undone circles (redo stack).
-- Buttons should update their `disabled` state based on circle history.
+* Use mouse coordinates and canvas bounding box to place circles.
+* Use `undo` and `redo` arrays to track drawing history.
+* Disable buttons when their respective actions aren’t possible.
+* Circles must appear visually correct and be testable individually.
+
+---

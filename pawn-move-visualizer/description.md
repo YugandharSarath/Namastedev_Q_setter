@@ -3,49 +3,41 @@
 
 ## ♟️ Pawn Move Visualizer
 
-### 👨‍🎓 Problem Statement
-
-Build a simple React app that shows a chessboard. When the user **clicks on a square**, show all valid **forward moves** for a **white pawn** starting from that square.
+Build a React component that renders an **8×8 chessboard**. When a user **clicks a square**, highlight all valid **forward moves** for a **white pawn** (which moves upward). Clear highlights on repeated or new selections.
 
 ---
 
 ### ✅ Requirements
 
-1. **Create an 8×8 chessboard** (64 squares in total).
-2. Make each square **clickable** (to represent the pawn's current position).
-3. When a square is clicked:
+1. Render an **8×8 board** = **64 cells**.
+2. Each cell must:
 
-   * Highlight **valid forward moves** for a white pawn.
-   * The clicked cell itself does **not** get highlighted.
-4. **Clear previous highlights** when another square is clicked.
-5. Follow **white pawn rules only** (moving upwards).
+   * Use `role="gridcell"`
+   * Be **clickable** to set pawn position
+   * Show `.active` class on the selected cell
+3. Show valid forward moves with the `.pawn-move` class.
+4. A white pawn can:
 
----
+   * Move 1 step forward from any row (except 0, 1)
+   * Move 2 steps forward **only** from the 2nd row (index 6)
+5. Do **not** show highlights on row 0 or 1.
+6. Highlight should clear when:
 
-### ⚠️ Edge Cases & Constraints
+   * A new square is clicked
+   * The same square is clicked again
 
-| Case                             | What Should Happen                               |
-| -------------------------------- | ------------------------------------------------ |
-| Click on 2nd row (index 6)       | Highlight 1 and 2 steps forward (row -1, row -2) |
-| Click on any row between 3–6     | Highlight 1 step forward (row -1)                |
-| Click on row 1 or 0 (top rows)   | No highlights (pawn cannot move forward)         |
-| Board cells count                | Must render **exactly 64** cells (8x8 grid)      |
-| Re-click on a highlighted square | Reset all highlights                             |
-| Valid pawn moves only            | No sideways, captures, en passant, or promotions |
 
----
+### 🧪 Edge Cases
 
-### 📌 Data Test IDs & Roles (For Accessibility and Testing)
-
-| Element          | `role`     | `data-testid`              |
-| ---------------- | ---------- | -------------------------- |
-| Board container  | `grid`     | `pawn-board`               |
-| Each row         | `row`      | `grid-row`                 |
-| Each square      | `gridcell` | `grid-cell`                |
-| Highlighted cell | `gridcell` | `highlighted` *(optional)* |
+| Case                     | Expected Behavior                       |
+| ------------------------ | --------------------------------------- |
+| Click on (6, 3)          | Highlight (5, 3) and (4, 3)             |
+| Click on (5, 4)          | Highlight only (4, 4)                   |
+| Click on top rows (1, 0) | No highlights                           |
+| Re-click same square     | Toggle off highlights                   |
+| Click another square     | Clear old and show new valid moves      |
+| Rapid clicks             | Component remains stable and consistent |
 
 ---
-
-
 
 

@@ -1,63 +1,54 @@
-🚦 **Traffic Lights Simulation**
 
 ---
 
-### 🧠 **Goal**
-
-Build a **traffic light simulator** with Red, Yellow, and Green lights. The system can **auto-cycle** (timed) or **manual cycle** (via button). Only **one light** is active at a time.
+## 🚦 Traffic Light Simulator – React App Challenge
 
 ---
 
-### ✅ **Core Features**
+### 🎯 **Objective**
 
-* 🚦 Lights: Red → Green → Yellow → Red
-* 🕒 **Auto Mode**:
-
-  * Red: 3s
-  * Green: 3s
-  * Yellow: 1s
-* ✋ **Manual Mode**: "Next" button to cycle lights
-* 🔁 Restarts always begin with **Red**
-* ✅ Only one light active at any moment
+Create a **traffic light simulator** in React that mimics real-world behavior by auto-cycling through Red → Green → Yellow repeatedly **or** lets users manually switch between lights. Only **one light** should be active at a time.
 
 ---
 
-### 🧪 **Testability Aids**
+### ✅ **Functional Requirements**
 
-| UI Element   | `data-testid`   |
-| ------------ | --------------- |
-| Red Light    | `light-red`     |
-| Yellow Light | `light-yellow`  |
-| Green Light  | `light-green`   |
-| Container    | `traffic-light` |
-| Next Button  | `next-button`   |
+1. **Lights:**
 
-🧪 **Tests Use**:
+   * Three lights: Red, Green, Yellow.
+   * Light cycle order: **Red → Green → Yellow → Red**.
 
-* `jest.useFakeTimers()`
-* `jest.advanceTimersByTime()`
-* `.toHaveClass("on")` to check active light
+2. **Modes:**
+
+   * **Auto Mode**:
+
+     * Red: active for 3 seconds.
+     * Green: active for 3 seconds.
+     * Yellow: active for 1 second.
+     * Cycles **infinitely** without crashing.
+   * **Manual Mode**:
+
+     * Clicking a **"Next"** button should advance to the next light manually.
+     * Light sequence still follows Red → Green → Yellow → Red.
+
+3. **Start Conditions:**
+
+   * Always **start** the simulation with Red light active.
+
+4. **UI Feedback:**
+
+   * Only **one light** should have the active class (e.g., `.on`) at any time.
+   * Active light must be visually identifiable (via styles or class name).
+
+
+
+### ⚠️ **Edge Cases to Handle**
+
+* Auto-cycling continues forever without freezing or glitches.
+* Manual cycling **should not** auto-advance — strictly one light per click.
+* System must **reset to Red** if re-mounted or restarted.
+* No simultaneous `.on` lights — visual feedback must be accurate.
 
 ---
 
-### 📚 **Edge Cases Handled**
-
-* Infinite auto-cycling without crash
-* Manual mode must not auto-advance
-* Always starts from Red
-* Only one `.on` light at any point
-
----
-
-### 🧪 **Sample Test Cases**
-
-| Test               | Outcome                                   |
-| ------------------ | ----------------------------------------- |
-| 🟥 Initial State   | Red is active                             |
-| 🟩 3s → Green      | Green active after 3s                     |
-| 🟡 Full Cycle      | Red → Green → Yellow → Red works properly |
-| 🔁 Two Loops       | Sequence repeats correctly                |
-| 💡 Visual Feedback | Only one light has `.on` class at a time  |
-
----
 

@@ -10,8 +10,12 @@
 .cell {
   width: 60px;
   height: 60px;
-  box-sizing: border-box;
-  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #999;
+  font-size: 0.875rem;
+  cursor: pointer;
 }
 
 .light {
@@ -28,4 +32,11 @@
 
 .rook-move {
   background-color: #4682b4; /* dark blue */
+}
+
+.rook-icon {
+  font-size: 28px;
+  font-weight: bold;
+  color: black;
+  pointer-events: none;
 }

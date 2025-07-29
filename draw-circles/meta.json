@@ -8,5 +8,5 @@
   "dependencies": [],
   "description": "Build a UI where users can draw circles at mouse click positions, with Undo and Redo functionality using React + TypeScript.",
   "companies": ["Figma", "Canva", "Miro", "Excalidraw"],
-  "time": "25–40 minutes"
+  "duration": "25–40 minutes"
 }

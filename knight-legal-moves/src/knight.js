@@ -1,19 +1,17 @@
-export function getKnightMoves(row, col) {
-  if (row < 0 || row > 7 || col < 0 || col > 7) return [];
-  const moves = [
-    [2, 1],
-    [2, -1],
-    [-2, 1],
-    [-2, -1],
-    [1, 2],
-    [1, -2],
-    [-1, 2],
-    [-1, -2],
+// knight.js
+const BOARD_SIZE = 8;
+
+function getKnightMoves(row, col) {
+  if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) return [];
+
+  const offsets = [
+    [2, 1], [2, -1], [-2, 1], [-2, -1],
+    [1, 2], [1, -2], [-1, 2], [-1, -2]
   ];
 
-  return moves
+  return offsets
     .map(([dr, dc]) => [row + dr, col + dc])
-    .filter(([r, c]) => r >= 0 && r < 8 && c >= 0 && c < 8);
+    .filter(([r, c]) => r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE);
 }
 
-module.exports = { getKnightMoves }; 
+export { getKnightMoves };

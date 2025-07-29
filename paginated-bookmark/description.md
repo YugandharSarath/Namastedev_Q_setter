@@ -1,85 +1,59 @@
 
 ---
 
-## 🔖 Paginated Bookmarks Viewer 
-
-### 🧠 Goal
-
-Build a paginated interface to view and manage bookmarked articles.
+## 🔖 Paginated Bookmarks Viewer
 
 ---
 
-### ✅ Core Features
+### ✅ **Requirements**
 
-* 📃 **Display Articles**
-  Show 5 articles per page
+You are building a **Paginated Article Bookmark Viewer** with the following features:
 
-* ↔️ **Pagination**
-  Prev / Next buttons (or numeric if needed)
+1. **Display Articles**
 
-* ⭐ **Bookmark Toggle**
-  Each article has a ★ toggle (active/inactive)
+   * Show a list of dummy articles (each with a title, content, and bookmark toggle)
+   * Only **5 articles** should be shown **per page**
 
-* 🔍 **Filter Toggle**
-  Checkbox or toggle to show only bookmarked items
+2. **Pagination**
 
-* 🔁 **State Persistence**
-  Keep bookmarks intact across pages & filters
+   * Allow users to navigate pages using **Prev** and **Next** buttons
+   * Ensure page boundaries are handled properly (i.e., no negative or overflow pages)
 
-* 📱 **Responsive Design** *(optional)*
+3. **Bookmark Toggle**
 
----
+   * Each article has a **★ icon** which can be toggled to **mark/unmark** as bookmarked
+   * Clicking it should visually reflect the state (highlighted if active)
 
-### 🧪 Test Coverage Summary
+4. **Bookmark Filter**
 
-| ✅ Test Case                            | 💬 Description                                                      |
-| -------------------------------------- | ------------------------------------------------------------------- |
-| displays only 5 articles per page      | First render should show max 5 articles only                        |
-| pagination updates displayed articles  | Clicking Next shows next batch of articles                          |
-| bookmark icon toggles bookmark state   | Clicking ★ toggles bookmarked state visually and logically          |
-| show only bookmarked filter works      | Activating filter shows only bookmarked articles                    |
-| pagination in filter mode              | Bookmarked-only view paginates if more than 5 bookmarked            |
-| bookmarks persist across pages/filters | Bookmark status should remain regardless of navigation              |
-| empty state on no bookmarks            | Show “No articles to display” if no results in bookmarked-only view |
-| last page has < 5 items                | Render available items gracefully                                   |
-| rapid clicks on pagination             | No crash or inconsistent UI on fast pagination clicks               |
+   * Checkbox toggle: “Show only bookmarked”
+   * When enabled, show only bookmarked articles (with pagination if needed)
 
----
+5. **State Persistence**
 
-### 📚 Edge Case Behaviors
+   * Bookmarks must remain active even after navigating pages or toggling the filter
+   * Toggling the filter should always return to **page 1**
 
-| Edge Case                         | Expected Behavior                              |
-| --------------------------------- | ---------------------------------------------- |
-| No bookmarks in filter mode       | Show empty message: “No articles to display.”  |
-| Bookmark removed in filtered view | Immediately remove from view                   |
-| Changing filters resets page      | Return to page 1 when toggling filters         |
-| Navigating retains bookmarks      | Bookmarks persist after any page/filter switch |
+6. **Empty State Handling**
+
+   * If there are no bookmarked articles in filter mode, show a message:
+     👉 *“No articles to display.”*
 
 ---
 
-### 🏷️ Suggested `data-testid`s
+### ⚠️ **Edge Cases & Constraints**
 
-| Element                  | Test ID                    |
-| ------------------------ | -------------------------- |
-| Article Title (by index) | `bookmark-title-${index}`  |
-| Bookmark Toggle Button   | `bookmark-toggle-${index}` |
-| Next Page Button         | `next-page`                |
-| Prev Page Button         | `prev-page`                |
-| Page Number (if numeric) | `page-${n}`                |
-| Filter Toggle            | `filter-toggle`            |
-| Empty Message Container  | `empty-state`              |
-
----
-
-### 🧪 Bonus: Sample Test Assertions
-
-```tsx
-expect(screen.getByTestId("bookmark-title-0")).toHaveTextContent("Article 1");
-fireEvent.click(screen.getByTestId("next-page"));
-expect(screen.getByTestId("bookmark-toggle-2")).toHaveClass("active");
-expect(screen.getByTestId("empty-state")).toBeInTheDocument();
-```
+| Situation                          | Expected Behavior                                 |
+| ---------------------------------- | ------------------------------------------------- |
+| Navigating fast between pages      | No crashes or unexpected behavior                 |
+| Filter enabled, but no bookmarks   | Show "No articles to display."                    |
+| Toggling bookmark in filtered view | Removes article immediately from the current list |
+| Navigating away and back           | Bookmark status is still preserved                |
+| Toggling filter                    | Automatically resets to page 1                    |
+| Last page has < 5 articles         | Show remaining articles correctly                 |
+| Clicking ★ multiple times rapidly  | Must still reflect correct toggle state           |
 
 ---
+
 
 

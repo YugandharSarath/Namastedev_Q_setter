@@ -13,7 +13,11 @@
   box-sizing: border-box;
   border: 1px solid #999;
   transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .light {
   background-color: #f0d9b5;
@@ -29,4 +33,11 @@
 
 .bishop-move {
   background-color: darkblue !important;
+}
+
+.bishop {
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block;
+  pointer-events: none;
 }

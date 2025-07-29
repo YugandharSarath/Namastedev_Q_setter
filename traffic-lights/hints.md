@@ -1,6 +1,11 @@
-"hints": [
-  "Use setInterval or setTimeout to manage timed transitions.",
-  "Use a state variable to track which light is active.",
-  "Use useEffect to set and clear timers properly.",
-  "Make sure only one light is 'on' at any given time."
-]
+
+### 💡 **Hints for Implementation**
+
+* Use state to track current active light.
+* Use `setTimeout` (or `setInterval`) in auto mode.
+* Clear timers on unmount or mode switch.
+* Ensure only one light is active at a time by conditional class application.
+* Think modular: separate visual logic from timing logic.
+
+---
+
