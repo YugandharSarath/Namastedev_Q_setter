@@ -1,0 +1,23 @@
+{
+  "id": "sudoku-board-interaction",
+  "title": "🧩 Sudoku Board Interaction",
+  "description": "Build a 9x9 Sudoku board that supports user interaction, validates Sudoku rules, and handles input constraints.",
+  "difficulty": "medium",
+  "skills": ["React", "JavaScript", "2D Arrays", "Form Handling", "Game Logic"],
+  "tags": ["sudoku", "puzzle", "grid", "validation", "input handling"],
+  "constraints": [
+    "Only digits 1–9 are allowed in user inputs",
+    "Initial puzzle cells are read-only",
+    "User inputs should update the board state",
+    "Validation must follow standard Sudoku rules (unique in row, column, and 3x3 sub-grid)"
+  ],
+  "edgeCases": [
+    "Typing 0 or non-digit characters should be blocked or ignored",
+    "Multiple same digits in a row, column or box should fail validation",
+    "Empty board must not crash validation logic"
+  ],
+  "hints": ["See hints.md for guidance on grid setup, cell state handling, and validation logic"],
+  "author": "Sarath",
+  "companies": ["Amazon", "TCS Digital", "Wipro TalentNext", "Zoho", "Capgemini"],
+  "duration": "60–75 minutes"
+}
