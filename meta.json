@@ -1,8 +1,23 @@
 {
-  "title": "Color Code Game",
-  "description": "Guess which color matches the given HEX code by selecting one of the three boxes.",
-  "difficulty": "Easy",
-  "topics": ["React", "useState", "useEffect", "Random", "CSS"],
-  "time": "15 mins",
-  "companies": ["Frontend Fun Inc"]
+  "title": "Ultimate RGB Color Code Guessing Game",
+  "description": "Build a React game where users must guess which color box matches a given RGB color code. The game should generate five visually similar options, allow only one guess per round, give immediate feedback, reset the game on play again, and enforce strict timing and UX behavior. Ensure the correct color is visibly shown after a wrong guess or timeout.",
+  "difficulty": "Hard",
+  "topics": [
+    "React",
+    "Hooks",
+    "useState",
+    "useEffect",
+    "useCallback",
+    "setTimeout",
+    "Color Manipulation",
+    "Event Handling",
+    "UX Design"
+  ],
+  "time": "45 mins",
+  "companies": [
+    "Frontend Fun Inc",
+    "UI Mastery Labs",
+    "ReactPlay",
+    "Pixel Precision Studio"
+  ]
 }
