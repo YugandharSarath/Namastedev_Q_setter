@@ -1,115 +1,57 @@
+---
+## 🌦️ Weather App — Geolocation-Based React App
+---
+
+### ✅ Requirements
+
+1. **Get Location Automatically**
+
+   - Use the browser’s geolocation API to fetch latitude and longitude.
+   - If geolocation is denied or unsupported, show an error.
+
+2. **Fetch Weather Data**
+
+   - Use the **OpenWeatherMap API** to get current weather using coordinates.
+   - Use metric units (`°C`) for temperature.
+   - Handle API errors (invalid key, rate limits, etc.).
+
+3. **Display Weather Info**
+
+   - Show:
+
+     - 🌆 City name
+     - 🌡️ Temperature (`data-testid="temperature"`)
+     - 💧 Humidity (`data-testid="humidity"`)
+     - 📝 Description (`data-testid="weather-condition"`)
+
+4. **Loading and Error States**
+
+   - Show `Loading...` while data is being fetched.
+   - Show proper error messages for:
+
+     - Permission denied
+     - Geolocation not supported
+     - API/network failure
 
 ---
 
-## 🌦️ Weather App 
+### ⚠️ Edge Cases & Constraints
 
-### 🧠 Problem Statement
+1. If geolocation is not supported by the browser, display the message:
+   👉 "Geolocation is not supported by your browser."
 
-Build a **React-based weather app** that fetches and displays **real-time weather info** using either:
+2. If the user denies location access or if there's any error retrieving the position (e.g., timeout, restricted settings), display:
+   👉 "Permission denied or unable to get location."
 
-* A **user-input city**, or
-* The user’s **geolocation (if permitted)**.
+3. If the OpenWeatherMap API returns an error (such as an invalid API key or malformed request), you should catch it and display the error message returned from the API (e.g., "Invalid API key." or "city not found").
 
----
+4. If the user is offline or the network fails, the app should not crash. Instead, catch the fetch error and show a message like:
+   👉 "Failed to fetch weather data."
 
-### 📦 Features
+5. If the API rate limit is exceeded (common on free plans), catch the response and display the message returned by the API:
+   👉 "Rate limit exceeded" or a similar descriptive message.
 
-✅ **User Input**
-
-* 🔍 `city-input`: Type any city name and fetch its weather
-
-✅ **Geolocation Support**
-
-* 📡 Auto-fetch location using `navigator.geolocation` (on mount)
-
-✅ **Display Weather Info**
-
-* 🌡️ Temperature – `data-testid="temperature"`
-* 🌧️ Weather Condition – `weather-condition`
-* 💧 Humidity – `humidity`
-* 🖼️ Weather Icon (optional with image alt or testid)
-
-✅ (Optional) **Extended Forecast**
-
-* 📆 Multi-day weather (if implementing full forecast API)
+6. If the API responds with an empty or broken response, ensure your code does not break or throw errors. Show a fallback message such as:
+   👉 "Unable to fetch weather data."
 
 ---
-
-### 🧪 Unit Test Summary
-
-#### ✅ GEOLOCATION TESTS
-
-| ID     | Scenario                | Expected UI Behavior                                                      |
-| ------ | ----------------------- | ------------------------------------------------------------------------- |
-| GEO-01 | Geolocation supported?  | `navigator.geolocation.getCurrentPosition` is called                      |
-| GEO-02 | User allows location    | Weather data fetched and rendered (temp, humidity, etc.)                  |
-| GEO-03 | User denies location    | Show: `"Permission denied or unable to get location."` → `error-message`  |
-| GEO-04 | Geolocation unsupported | Show: `"Geolocation is not supported by your browser."` → `error-message` |
-
-#### ✅ API BEHAVIOR TESTS
-
-| ID     | Scenario                | Result                                   |
-| ------ | ----------------------- | ---------------------------------------- |
-| API-01 | Valid API key           | Weather shown correctly                  |
-| API-02 | Invalid API key         | Show: `"Invalid API key."`               |
-| API-03 | No internet/fetch fails | Show: `"Unable to fetch weather data"`   |
-| API-04 | API limit exceeded      | Show: `"Rate limit exceeded"` or similar |
-
-#### ✅ UI STATE TESTS
-
-| ID    | Scenario       | Result                            |
-| ----- | -------------- | --------------------------------- |
-| UI-01 | Weather loaded | Show city, temperature, condition |
-| UI-02 | Error state    | Show appropriate error-message    |
-| UI-03 | While loading  | Show: `"Loading..."`              |
-
----
-
-### 🧪 Code-Level Testability (React Testing Library)
-
-```tsx
-// Set input
-fireEvent.change(screen.getByTestId("city-input"), { target: { value: "Delhi" } });
-
-// Trigger fetch
-fireEvent.click(screen.getByTestId("get-weather"));
-
-// Expect output
-await waitFor(() => expect(screen.getByTestId("temperature")).toBeVisible());
-```
-
----
-
-### 📚 Edge Cases
-
-| Case           | Behavior                                             |
-| -------------- | ---------------------------------------------------- |
-| ❌ Invalid city | Show error like “City not found” via `error-message` |
-| ⚠️ API failure | Show “Try again later”                               |
-| 🚫 Empty input | Do **not** trigger API call                          |
-
----
-
-### 🏷️ Suggested `data-testid`s
-
-| Element               | Test ID             |
-| --------------------- | ------------------- |
-| City Input            | `city-input`        |
-| Get Weather Button    | `get-weather`       |
-| Temperature Display   | `temperature`       |
-| Humidity Display      | `humidity`          |
-| Weather Condition     | `weather-condition` |
-| Error Message         | `error-message`     |
-| Optional Weather Icon | `weather-icon`      |
-
----
-
-### 💡 Bonus Extensions
-
-* ⏰ Add a live clock or current time in city
-* 🌐 Multi-language/localization support
-* 📆 Show 5-day forecast using OpenWeatherMap's forecast API
-* 🌙 Dynamic background based on weather/temperature
-
----
-
