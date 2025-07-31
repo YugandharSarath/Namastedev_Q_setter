@@ -1,54 +1,64 @@
+### 💡 Hints 
+
+#### 1. Queen Movement Logic
+
+Use this utility logic to determine if a square is a valid Queen move:
+
+```js
+const isQueenMoveCell = (fromRow, fromCol, toRow, toCol) => {
+  return (
+    fromRow === toRow ||                 // Same row
+    fromCol === toCol ||                 // Same column
+    Math.abs(fromRow - toRow) === Math.abs(fromCol - toCol) // Diagonal
+  );
+};
+```
 
 ---
 
-## 💡 Hints – Queen Move Visualizer
+#### 2. Highlighting Cells
 
-1. **Queen = Rook + Bishop**
-   A Queen moves:
+Use conditional classes to style the square based on state:
 
-   * Horizontally (same row)
-   * Vertically (same column)
-   * Diagonally (like a Bishop)
+```jsx
+const classes = `cell ${cellColor} ${isHovered ? "hovered" : ""} ${
+  isQueenMove ? "queen-move" : ""
+}`;
+```
 
-2. **Detect Diagonals**
-   Use the absolute difference of row and column positions:
+And render like:
 
-   ```js
-   Math.abs(hoveredRow - row) === Math.abs(hoveredCol - col)
-   ```
-
-3. **Check Horizontals & Verticals**
-   Same row:
-
-   ```js
-   hoveredRow === row
-   ```
-
-   Same column:
-
-   ```js
-   hoveredCol === col
-   ```
-
-4. **Avoid Highlighting the Queen’s Cell**
-   Skip highlighting if the cell is the one currently hovered:
-
-   ```js
-   hovered[0] === row && hovered[1] === col
-   ```
-
-5. **Combine All Move Checks**
-   Wrap Queen movement logic into one condition:
-
-   ```js
-   isQueenMove = horizontal || vertical || diagonal
-   ```
-
-6. **Only One Active State**
-   Reset highlights by updating state (`setHovered`) when user moves to a new cell.
-
-7. **Edge Safety**
-   Logic must work correctly even for corner squares like A1, H8, etc.
+```jsx
+<div
+  onMouseEnter={() => setHovered([row, col])}
+  onMouseLeave={() => setHovered(null)}
+  data-testid={`cell-${row}-${col}`}
+  className={classes}
+>
+  {isHovered && <span className="queen-icon">♛</span>}
+</div>
+```
 
 ---
+
+#### 3. CSS Highlighting
+
+Use styles like these in your CSS:
+
+```css
+.queen-move {
+  background-color: purple !important;
+}
+
+.hovered {
+  background-color: lightblue !important;
+}
+
+.queen-icon {
+  font-size: 28px;
+  font-weight: bold;
+  pointer-events: none;
+}
+```
+
 
