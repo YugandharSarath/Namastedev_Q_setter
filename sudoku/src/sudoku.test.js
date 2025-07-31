@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import SudokuBoard from "./sudokuBoard"; // Corrected import to sudokuBoard
+import SudokuBoard from "./sudoku"; // Corrected import to sudokuBoard
+import '@testing-library/jest-dom';
 
 test("renders all 81 cells", () => {
   render(<SudokuBoard />);

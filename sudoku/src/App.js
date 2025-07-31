@@ -1,5 +1,5 @@
 import React from "react";
-import SudokuBoard from "./sudokuBoard";
+import SudokuBoard from "./sudoku";
 import "./sudoku.css";
 
 function App() {
