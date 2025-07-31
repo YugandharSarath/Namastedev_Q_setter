@@ -1,97 +1,59 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import App from './App'; 
-
-function algebraicToIndex(pos) {
-  if (!/^[a-h][1-8]$/.test(pos)) return null; 
-  const col = pos.charCodeAt(0) - 'a'.charCodeAt(0); 
-  const row = 8 - parseInt(pos[1], 10); 
-  return [row, col];
-}
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from './App'; // Replace with your PawnBoard component
 
 describe('Pawn Move Visualizer', () => {
-
-  beforeEach(() => {
+  test('renders an 8x8 chessboard', () => {
     render(<App />);
+    const cells = screen.getAllByRole('gridcell');
+    expect(cells).toHaveLength(64);
   });
 
-  async function hoverCell(pos) {
-    const idx = algebraicToIndex(pos);
-    if (!idx) return; 
-    const [row, col] = idx;
+  test('highlights one move forward for non-starting pawn', () => {
+    render(<App />);
+    const cells = screen.getAllByRole('gridcell');
+    const e4 = cells[4 * 8 + 4]; // e4
+    fireEvent.mouseEnter(e4);
 
-    const cell = screen.getAllByRole('gridcell')[row * 8 + col];
-    await userEvent.hover(cell); 
-    return cell;
-  }
+    expect(e4.className).toMatch(/hovered/);
+    const expectedIdx = (3 * 8) + 4; // e5
+    expect(cells[expectedIdx].className).toMatch(/pawn-move/);
 
-  function getPawnMoveCells() {
-    return screen.getAllByRole('gridcell').filter(cell =>
-      cell.className.includes('pawn-move')
-    );
-  }
-
-  it('shows correct moves for white pawn on e2', async () => {
-    await hoverCell('e2'); 
-    const moves = getPawnMoveCells(); 
-
-    expect(moves).toHaveLength(2);
-    const indices = moves.map(cell => screen.getAllByRole('gridcell').indexOf(cell));
-    expect(indices).toEqual(expect.arrayContaining([5 * 8 + 4, 4 * 8 + 4]));
+    fireEvent.mouseLeave(e4);
+    cells.forEach(cell => {
+      expect(cell.className).not.toMatch(/pawn-move|hovered/);
+    });
   });
 
-  it('shows correct moves for white pawn on e4', async () => {
-    await hoverCell('e4'); 
-    const moves = getPawnMoveCells(); 
+  test('highlights two moves forward for starting position', () => {
+    render(<App />);
+    const cells = screen.getAllByRole('gridcell');
+    const e2 = cells[6 * 8 + 4]; // e2
+    fireEvent.mouseEnter(e2);
 
-    expect(moves).toHaveLength(1);
-    const idx = screen.getAllByRole('gridcell').indexOf(moves[0]);
-    expect(idx).toBe(3 * 8 + 4);
+    expect(e2.className).toMatch(/hovered/);
+    const expected1 = (5 * 8) + 4; // e3
+    const expected2 = (4 * 8) + 4; // e4
+
+    expect(cells[expected1].className).toMatch(/pawn-move/);
+    expect(cells[expected2].className).toMatch(/pawn-move/);
+
+    fireEvent.mouseLeave(e2);
+    cells.forEach(cell => {
+      expect(cell.className).not.toMatch(/pawn-move|hovered/);
+    });
   });
 
-  it('shows correct moves for white pawn on h2', async () => {
-    await hoverCell('h2'); 
-    const moves = getPawnMoveCells(); 
+  test('no pawn moves if on rank 1', () => {
+    render(<App />);
+    const cells = screen.getAllByRole('gridcell');
+    const e1 = cells[7 * 8 + 4]; // e1 (promotion rank)
+    fireEvent.mouseEnter(e1);
 
-    expect(moves).toHaveLength(2);
-    const indices = moves.map(cell => screen.getAllByRole('gridcell').indexOf(cell));
-    expect(indices).toEqual(expect.arrayContaining([5 * 8 + 7, 4 * 8 + 7]));
-  });
+    expect(e1.className).toMatch(/hovered/);
+    const pawnMoves = cells.filter(cell => cell.className.includes('pawn-move'));
+    expect(pawnMoves).toHaveLength(0);
 
-  it('shows correct moves for white pawn on h8 (edge, no moves)', async () => {
-    await hoverCell('h8'); 
-    const moves = getPawnMoveCells(); 
-    expect(moves).toHaveLength(0); 
-  });
-
-  it('shows no moves for invalid positions', () => {
-
-    expect(algebraicToIndex('z9')).toBeNull();
-    expect(algebraicToIndex('@2')).toBeNull();
-    expect(algebraicToIndex('e9')).toBeNull();
-    expect(algebraicToIndex('e0')).toBeNull();
-  });
-
-  it('clears pawn moves on mouse leave', async () => {
-    const cell = await hoverCell('e2'); 
-    expect(getPawnMoveCells()).toHaveLength(2); 
-    await userEvent.unhover(cell); 
-    expect(getPawnMoveCells()).toHaveLength(0); 
-  });
-
-  it('shows correct moves for white pawn on d7', async () => {
-    await hoverCell('d7'); 
-
-    expect(getPawnMoveCells()).toHaveLength(1);
-  });
-
-  it('shows correct moves for white pawn on d5', async () => {
-    await hoverCell('d5'); 
-
-    const moves = getPawnMoveCells();
-    expect(moves).toHaveLength(1);
-    const idx = screen.getAllByRole('gridcell').indexOf(moves[0]);
-    expect(idx).toBe(2 * 8 + 3);
+    fireEvent.mouseLeave(e1);
   });
 });

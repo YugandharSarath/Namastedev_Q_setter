@@ -1,46 +1,49 @@
 
 ---
-
 ## ♟️ Pawn Move Visualizer
 
-Build a React component that shows an 8×8 chessboard. When a user **clicks** on a square, highlight all **valid forward cells** a **white pawn** can move to. Clear highlights on repeated or new selection.
+Build a React component that displays an 8×8 chessboard. When the user **hovers over any square**, it shows all **valid forward cells** a  pawn could move to from that square. All highlights must clear when the hover ends or moves to another square.
+---
+
+### ✅ Requirements (in clear terms)
+
+1. Display an 8×8 grid (64 total cells), styled as a chessboard.
+
+2. Each square must have the attribute `role="gridcell"` for accessibility and testability.
+
+3. When the user **hovers** over a square:
+
+   - That square should show a pawn icon (`♙`) and get the `.hovered` class.
+   - All valid forward move squares should be highlighted with the `.pawn-move` class.
+
+4. For the pawn's movement:
+
+   - It moves **upward** (toward decreasing row index).
+   - From **row 6** (its initial row), it can move **1 or 2 steps forward**.
+   - From **rows 2 to 5**, it can move **1 step forward**.
+   - From **row 0 or 1**, it **cannot move** (no squares should be highlighted).
+
+5. When the mouse leaves a cell:
+
+   - All highlights, including the hovered cell and pawn-move cells, should disappear.
 
 ---
 
-### ✅ Requirements
+### ⚠️ Edge Cases (explained in plain English)
 
-1. Render an 8x8 board = 64 cells.
+- **Hovering over square e4 (row 4, column 4)**
+  → Should highlight only one square ahead (e5), because this is a normal pawn position (not the starting row).
 
-2. Each cell must use `role="gridcell"`.
+- **Hovering over square e2 (row 6, column 4)**
+  → Should highlight two squares ahead: e3 and e4. Pawns on the starting row can move one or two steps forward.
 
-3. When the user **clicks** a square, it:
+- **Hovering over square e1 (row 7, column 4)**
+  → Should not highlight any move squares, since a pawn on the last rank cannot go forward.
 
-   * Highlights that cell with the CSS class `.active`.
-   * Highlights all valid forward moves (for a white pawn) from that cell using the CSS class `.pawn-move`.
+- **Mouse leaves any square**
+  → All highlights and pawn icons should be removed instantly.
 
-4. A white pawn:
-
-   * Moves upward on the board (toward decreasing row index).
-   * Can move **1 step forward** from any row except 0 or 1.
-   * Can move **2 steps forward only** from row 6 (its initial position).
-   * Cannot move from row 0 or 1.
-
-5. Highlight must clear when:
-
-   * The same cell is clicked again (toggle off).
-   * A different cell is clicked (clear old, show new).
+- **Hovering quickly over different squares**
+  → Only the most recently hovered square and its valid moves should be highlighted. Previous highlights must disappear.
 
 ---
-
-### ⚠️ Edge Cases
-
-* **Click on (6, 3)** → Should highlight (5, 3) and (4, 3)
-* **Click on (5, 4)** → Should highlight only (4, 4)
-* **Click on (1, x) or (0, x)** → Should not highlight anything
-* **Click same square again** → Should remove all highlights
-* **Click a new square** → Should clear previous and apply new
-* **Rapid clicks** → Highlights should update consistently with latest selection
-
----
-
-

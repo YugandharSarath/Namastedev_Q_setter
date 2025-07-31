@@ -10,17 +10,18 @@ export default function PawnBoard() {
       {Array.from({ length: boardSize }).map((_, row) =>
         Array.from({ length: boardSize }).map((_, col) => {
           const isHovered = hovered && hovered[0] === row && hovered[1] === col;
-
           let isPawnMove = false;
+
           if (hovered) {
             const [hoverRow, hoverCol] = hovered;
-
-            if (hoverRow > 0 && hoverRow < 8) {
+            // Only allow moves if the pawn is not on the last rank (row 7)
+            if (hoverRow < 7) {
               if (hoverRow === 6) {
+                // Pawn on its starting square can move one or two steps forward
                 isPawnMove =
-                  (row === hoverRow - 1 || row === hoverRow - 2) &&
-                  col === hoverCol;
+                  (row === hoverRow - 1 || row === hoverRow - 2) && col === hoverCol;
               } else {
+                // All other pawns can only move one step forward
                 isPawnMove = row === hoverRow - 1 && col === hoverCol;
               }
             }

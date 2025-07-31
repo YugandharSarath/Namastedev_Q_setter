@@ -3,56 +3,45 @@ import "./QueenChessboard.css";
 
 const boardSize = 8;
 
-function QueenChessboard() {
+export default function QueenBoard() {
   const [hovered, setHovered] = useState(null);
 
-  const isHoveredSquare = (row, col) => {
-    return hovered && hovered[0] === row && hovered[1] === col;
-  };
-
-  const isQueenMove = (row, col) => {
-    if (!hovered) return false;
-
-    const [hoveredRow, hoveredCol] = hovered;
-
+  const isQueenMoveCell = (fromRow, fromCol, toRow, toCol) => {
     return (
-      !isHoveredSquare(row, col) &&
-      (hoveredRow === row ||
-        hoveredCol === col ||
-        Math.abs(hoveredRow - row) === Math.abs(hoveredCol - col))
+      fromRow === toRow ||
+      fromCol === toCol ||
+      Math.abs(fromRow - toRow) === Math.abs(fromCol - toCol)
     );
   };
 
-  const renderBoard = () => {
-    const board = [];
-    for (let row = 0; row < boardSize; row++) {
-      for (let col = 0; col < boardSize; col++) {
-        const isLight = (row + col) % 2 === 0;
-        let cellClasses = `cell ${isLight ? "light" : "dark"}`;
+  return (
+    <div className="board" role="grid">
+      {Array.from({ length: boardSize }).map((_, row) =>
+        Array.from({ length: boardSize }).map((_, col) => {
+          const isHovered = hovered && hovered[0] === row && hovered[1] === col;
+          const isQueenMove =
+            hovered && isQueenMoveCell(hovered[0], hovered[1], row, col);
+          const cellColor = (row + col) % 2 === 0 ? "light" : "dark";
+          const classes = `cell ${cellColor} ${isHovered ? "hovered" : ""} ${
+            isQueenMove ? "queen-move" : ""
+          }`;
 
-        if (isHoveredSquare(row, col)) {
-          cellClasses += " hovered";
-        } else if (isQueenMove(row, col)) {
-          cellClasses += " queen-move";
-        }
-
-        board.push(
-          <div
-            key={`${row}-${col}`}
-            data-testid={`cell-${row}-${col}`}
-            className={cellClasses}
-            onMouseEnter={() => setHovered([row, col])}
-            onMouseLeave={() => setHovered(null)}
-          >
-            {isHoveredSquare(row, col) && <span className="queen-icon">♛</span>}
-          </div>
-        );
-      }
-    }
-    return board;
-  };
-
-  return <div className="board">{renderBoard()}</div>;
+          return (
+            <div
+              key={`${row}-${col}`}
+              role="gridcell"
+              className={classes}
+              onMouseEnter={() => setHovered([row, col])}
+              onMouseLeave={() => setHovered(null)}
+              data-testid={`cell-${row}-${col}`}
+              data-row={row}
+              data-col={col}
+            >
+              {isHovered && <span className="queen-icon">♛</span>}
+            </div>
+          );
+        })
+      )}
+    </div>
+  );
 }
-
-export default QueenChessboard;
