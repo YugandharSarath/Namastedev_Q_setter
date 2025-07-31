@@ -1,6 +1,21 @@
+// KnightChessboard.js
 import React, { useState } from "react";
-import { getKnightMoves } from "./knight";
 import "./KnightChessboard.css";
+
+const BOARD_SIZE = 8;
+
+export function getKnightMoves(row, col) {
+  if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) return [];
+
+  const offsets = [
+    [2, 1], [2, -1], [-2, 1], [-2, -1],
+    [1, 2], [1, -2], [-1, 2], [-1, -2]
+  ];
+
+  return offsets
+    .map(([dr, dc]) => [row + dr, col + dc])
+    .filter(([r, c]) => r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE);
+}
 
 const KnightChessboard = () => {
   const [hovered, setHovered] = useState(null);
@@ -9,8 +24,8 @@ const KnightChessboard = () => {
 
   return (
     <div className="chessboard-grid">
-      {Array.from({ length: 8 }).map((_, row) =>
-        Array.from({ length: 8 }).map((_, col) => {
+      {Array.from({ length: BOARD_SIZE }).map((_, row) =>
+        Array.from({ length: BOARD_SIZE }).map((_, col) => {
           const isLight = (row + col) % 2 === 0;
           const isHovered = hovered && hovered[0] === row && hovered[1] === col;
           const isMove = knightMoves.some(([r, c]) => r === row && c === col);

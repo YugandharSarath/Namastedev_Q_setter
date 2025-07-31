@@ -1,5 +1,5 @@
 
-const { getKnightMoves } = require('./knight');
+const { getKnightMoves } = require('./KnightChessboard');
 
 describe('getKnightMoves', () => {
   it('returns correct moves for d4 (3,3)', () => {

@@ -1,52 +1,64 @@
 
+## 💡 Hints.md 
+
+### 1. 🧮 Render an 8×8 Grid
+
+Use nested loops with `Array.from` to render 8 rows and 8 columns:
+
+```js
+Array.from({ length: 8 }).map((_, row) =>
+  Array.from({ length: 8 }).map((_, col) => { ... })
+)
+```
+
 ---
-
-## 💡 Hints.md – Knight Move Visualizer
-
-### 1. 🧮 Render an 8×8 Chessboard
-
-* Use nested `Array.from` to render rows and columns:
-
-  ```js
-  Array.from({ length: 8 }).map((_, row) =>
-    Array.from({ length: 8 }).map((_, col) => { ... })
-  )
-  ```
 
 ### 2. 🐴 Knight Move Logic
 
-* The knight moves in "L" shapes:
+A knight moves in "L" shapes. From a position `(row, col)`, valid moves are:
 
-  ```js
-  export const getKnightMoves = (row, col) => {
-    const moves = [
-      [row - 2, col - 1], [row - 2, col + 1],
-      [row - 1, col - 2], [row - 1, col + 2],
-      [row + 1, col - 2], [row + 1, col + 2],
-      [row + 2, col - 1], [row + 2, col + 1],
-    ];
-    return moves.filter(([r, c]) => r >= 0 && r < 8 && c >= 0 && c < 8);
-  };
-  ```
+```js
+const getKnightMoves = (row, col) => {
+  const offsets = [
+    [2, 1], [2, -1], [-2, 1], [-2, -1],
+    [1, 2], [1, -2], [-1, 2], [-1, -2],
+  ];
+
+  return offsets
+    .map(([dr, dc]) => [row + dr, col + dc])
+    .filter(([r, c]) => r >= 0 && r < 8 && c >= 0 && c < 8);
+};
+```
+
+---
 
 ### 3. 🎯 Handle Hover State
 
-* Track the current cell with:
+Track the square being hovered with a `useState` variable:
 
-  ```js
-  const [hovered, setHovered] = useState(null);
-  ```
-* Update on mouse events:
+```js
+const [hovered, setHovered] = useState(null);
 
-  ```js
-  onMouseEnter={() => setHovered([row, col])}
-  onMouseLeave={() => setHovered(null)}
-  ```
+onMouseEnter={() => setHovered([row, col])}
+onMouseLeave={() => setHovered(null)}
+```
 
-### 4. 🔍 Highlight Valid Moves
+---
 
-* Use `getKnightMoves(...hovered)` to calculate legal target squares.
-* Use `.some(([r, c]) => r === row && c === col)` to check if a square is a valid move and highlight it.
+### 4. ✨ Highlight Valid Moves
+
+Use the `getKnightMoves(...hovered)` result to determine which squares to highlight:
+
+```js
+const knightMoves = hovered ? getKnightMoves(...hovered) : [];
+
+const isMove = knightMoves.some(([r, c]) => r === row && c === col);
+```
+
+Apply the correct CSS classes:
+
+* `.selected-square` for the hovered cell.
+* `.knight-move-target` for cells where the knight can move.
 
 ---
 
