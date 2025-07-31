@@ -1,73 +1,59 @@
 
 ---
 
-## 🧠 `hints.md` – Rook Move Visualizer
+## 🧠 **Hints for Rook Move Visualizer**
 
-### 💡 Core Concepts
+1. ### 🎯 Board Structure
 
-* A **Rook** moves horizontally and vertically – along the **same row** and **same column**.
-* We can determine valid rook moves by checking:
+   * You need a standard **8x8 chessboard**.
+   * Render 64 square cells using nested loops or `Array.from({ length: 64 })`.
 
-  ```js
-  hovered[0] === row || hovered[1] === col
-  ```
-* The hovered square is where the rook is currently "placed", and can be tracked using:
+2. ### 📌 Cell Identification
 
-  ```js
-  useState([row, col])
-  ```
+   * Assign a `role="gridcell"` to each cell to allow querying in tests.
+   * Calculate the **row** and **column** using:
 
----
+     ```js
+     const row = Math.floor(index / 8);
+     const col = index % 8;
+     ```
 
-### 🔁 Grid Construction
+3. ### 🖱️ Hover Mechanics
 
-* Use `Array.from({ length: 8 })` to generate an 8×8 board.
-* Each cell needs a **unique key** (e.g., `key={`\${row}-\${col}`}`).
-* Add `role="gridcell"` for accessibility compliance.
+   * When hovering over a cell, store its row and column as `hoveredRow` and `hoveredCol`.
+   * On `mouseLeave`, clear this state.
 
----
+4. ### ✨ Highlighting Logic
 
-### 🖱 Hover Behavior
+   * Highlight all cells in the same **row** and **column** as the hovered cell **except** the hovered cell itself.
+   * Add `className="rook-move"` to such cells.
+   * Add `className="hovered"` to the hovered cell itself.
 
-* Track the currently hovered cell using:
+5. ### 🎨 Conditional Class Assignment
 
-  ```js
-  const [hovered, setHovered] = useState(null);
-  ```
+   * Each cell’s class should depend on whether it matches the hovered row/col:
 
-* Update this state using `onMouseEnter` and `onMouseLeave`.
+     ```js
+     let className = "";
+     if (row === hoveredRow && col === hoveredCol) {
+       className = "hovered";
+     } else if (row === hoveredRow || col === hoveredCol) {
+       className = "rook-move";
+     }
+     ```
 
-* On hover:
+6. ### ✅ Test Coverage
 
-  * Highlight all cells where:
+   * Tests validate:
 
-    ```js
-    row === hovered[0] || col === hovered[1]
-    ```
-  * You may **exclude** the hovered cell itself by checking:
+     * The board has 64 cells.
+     * Proper highlights on central (e.g., D4), edge (A8), and corner (H1) positions.
+     * No class is applied when not hovering.
 
-    ```js
-    !(row === hovered[0] && col === hovered[1])
-    ```
+7. ### 🔄 State Management
 
----
-
-### 🎨 Cell Styling
-
-* Use `isLight = (row + col) % 2 === 0` for alternate light/dark chessboard pattern.
-* Add CSS classes based on the cell state:
-
-  * `"hovered"` for the selected cell.
-  * `"rook-move"` for valid rook movement cells (excluding current).
-* Add an icon like `♜` inside the hovered cell for a visual rook marker (optional).
+   * Use `useState` to track the currently hovered square’s row and column.
+   * Update on `onMouseEnter` and reset on `onMouseLeave`.
 
 ---
-
-### 🧪 Optional Enhancements
-
-* Use `data-testid` for each cell (e.g., `cell-3-4`) to ease testing.
-* Add transitions in CSS to make highlights smooth.
-
----
-
 
