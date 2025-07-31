@@ -1,42 +1,58 @@
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import KnightChessboard from "./KnightChessboard";
+import "@testing-library/jest-dom";
 
-const { getKnightMoves } = require('./KnightChessboard');
-
-describe('getKnightMoves', () => {
-  it('returns correct moves for d4 (3,3)', () => {
-    const moves = getKnightMoves(3, 3);
-    const expected = [
-      [5, 4], [5, 2], [1, 4], [1, 2],
-      [4, 5], [4, 1], [2, 5], [2, 1]
-    ];
-    expect(moves).toEqual(expect.arrayContaining(expected));
-    expect(moves.length).toBe(8);
+describe("🐴 Knight Move Visualizer", () => {
+  beforeEach(() => {
+    render(<KnightChessboard />);
   });
 
-  it('returns correct moves for a1 (0,0)', () => {
-    const moves = getKnightMoves(0, 0);
-    const expected = [
-      [2, 1], [1, 2]
-    ];
-    expect(moves).toEqual(expect.arrayContaining(expected));
-    expect(moves.length).toBe(2);
+  test("Initial render should not show any highlighted squares", () => {
+    const highlighted = document.querySelectorAll(".knight-move-target");
+    expect(highlighted.length).toBe(0);
   });
 
-  it('returns correct moves for h8 (7,7)', () => {
-    const moves = getKnightMoves(7, 7);
-    const expected = [
-      [5, 6], [6, 5]
-    ];
-    expect(moves).toEqual(expect.arrayContaining(expected));
-    expect(moves.length).toBe(2);
+  test("Hovering over (3,3) should highlight 8 valid knight moves", () => {
+    const cell = screen.getByTestId("cell-3-3");
+    fireEvent.mouseEnter(cell);
+
+    const highlighted = document.querySelectorAll(".knight-move-target");
+    expect(highlighted.length).toBe(8);
+    expect(cell).toHaveClass("selected-square");
   });
 
-  it('returns 8 valid moves for e5 (4,4)', () => {
-    const moves = getKnightMoves(4, 4);
-    expect(moves.length).toBe(8);
+  test("Hovering over (0,0) should highlight only 2 valid knight moves", () => {
+    const cell = screen.getByTestId("cell-0-0");
+    fireEvent.mouseEnter(cell);
+
+    const highlighted = document.querySelectorAll(".knight-move-target");
+    expect(highlighted.length).toBe(2);
   });
 
-  it('returns empty array for out-of-bounds input', () => {
-    expect(getKnightMoves(8, 8)).toEqual([]);
-    expect(getKnightMoves(-1, -1)).toEqual([]);
+  test("Hover and then mouse leave should remove all highlights", () => {
+    const cell = screen.getByTestId("cell-3-3");
+    fireEvent.mouseEnter(cell);
+    fireEvent.mouseLeave(cell);
+
+    const highlighted = document.querySelectorAll(".knight-move-target");
+    expect(highlighted.length).toBe(0);
   });
+
+  test("Hovering over edge square (0,7) should highlight 2 valid knight moves", () => {
+    const cell = screen.getByTestId("cell-0-7");
+    fireEvent.mouseEnter(cell);
+
+    const highlighted = document.querySelectorAll(".knight-move-target");
+    expect(highlighted.length).toBe(2);
+  });
+
+  test('Hovering over center-ish square (4,4) should highlight 8 valid knight moves', () => {
+  const cell = screen.getByTestId('cell-4-4');
+  fireEvent.mouseEnter(cell);
+
+  const highlighted = document.querySelectorAll('.knight-move-target');
+  expect(highlighted.length).toBe(8);
+});
+
 });

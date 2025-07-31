@@ -1,9 +1,8 @@
+## 💡 Hints.md (Updated)
 
-## 💡 Hints.md 
+### 1. 🧱 Create the Chessboard
 
-### 1. 🧮 Render an 8×8 Grid
-
-Use nested loops with `Array.from` to render 8 rows and 8 columns:
+Use nested `Array.from` to generate rows and columns dynamically:
 
 ```js
 Array.from({ length: 8 }).map((_, row) =>
@@ -13,28 +12,9 @@ Array.from({ length: 8 }).map((_, row) =>
 
 ---
 
-### 2. 🐴 Knight Move Logic
+### 2. 🎯 Highlight on Hover
 
-A knight moves in "L" shapes. From a position `(row, col)`, valid moves are:
-
-```js
-const getKnightMoves = (row, col) => {
-  const offsets = [
-    [2, 1], [2, -1], [-2, 1], [-2, -1],
-    [1, 2], [1, -2], [-1, 2], [-1, -2],
-  ];
-
-  return offsets
-    .map(([dr, dc]) => [row + dr, col + dc])
-    .filter(([r, c]) => r >= 0 && r < 8 && c >= 0 && c < 8);
-};
-```
-
----
-
-### 3. 🎯 Handle Hover State
-
-Track the square being hovered with a `useState` variable:
+Track which square is hovered using React state:
 
 ```js
 const [hovered, setHovered] = useState(null);
@@ -45,20 +25,67 @@ onMouseLeave={() => setHovered(null)}
 
 ---
 
-### 4. ✨ Highlight Valid Moves
+### 3. 🧠 Compute Valid Knight Moves
 
-Use the `getKnightMoves(...hovered)` result to determine which squares to highlight:
+From a square `(row, col)`, a knight can move in 8 possible “L” shaped directions:
 
 ```js
-const knightMoves = hovered ? getKnightMoves(...hovered) : [];
-
-const isMove = knightMoves.some(([r, c]) => r === row && c === col);
+const knightOffsets = [
+  [2, 1], [2, -1], [-2, 1], [-2, -1],
+  [1, 2], [1, -2], [-1, 2], [-1, -2],
+];
 ```
 
-Apply the correct CSS classes:
+Filter only the positions inside the 8×8 board:
 
-* `.selected-square` for the hovered cell.
-* `.knight-move-target` for cells where the knight can move.
+```js
+const isValid = (r, c) => r >= 0 && r < 8 && c >= 0 && c < 8;
+```
 
 ---
 
+### 4. 🖌️ Apply CSS Classes
+
+Use logic like:
+
+```js
+const isHovered = hovered && hovered[0] === row && hovered[1] === col;
+const isTarget =
+  hovered &&
+  knightOffsets
+    .map(([dr, dc]) => [hovered[0] + dr, hovered[1] + dc])
+    .some(([r, c]) => r === row && c === col && isValid(r, c));
+```
+
+Then apply:
+
+* `.selected-square` if `isHovered`
+* `.knight-move-target` if `isTarget`
+
+---
+
+## ✅ Test Cases (Suggested Set)
+
+Here are 5 useful test cases you can implement using `@testing-library/react`:
+
+1. **Initial Render**
+
+   * No square should have `.selected-square` or `.knight-move-target`.
+
+2. **Hover on (0, 0)**
+
+   * `.selected-square` should be on `(0,0)`.
+   * Only 2 valid `.knight-move-target` cells expected.
+
+3. **Hover on (3, 3)**
+
+   * Should show `.selected-square` on `(3,3)`.
+   * All 8 knight moves should be highlighted.
+
+4. **Hover on Edge (0, 3)**
+
+   * Only 4 target squares should be visible.
+
+5. **Unhover / MouseLeave**
+
+   * All highlights should be cleared after mouse leaves the square.

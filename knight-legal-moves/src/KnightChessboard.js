@@ -4,12 +4,18 @@ import "./KnightChessboard.css";
 
 const BOARD_SIZE = 8;
 
-export function getKnightMoves(row, col) {
+function getKnightMoves(row, col) {
   if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) return [];
 
   const offsets = [
-    [2, 1], [2, -1], [-2, 1], [-2, -1],
-    [1, 2], [1, -2], [-1, 2], [-1, -2]
+    [2, 1],
+    [2, -1],
+    [-2, 1],
+    [-2, -1],
+    [1, 2],
+    [1, -2],
+    [-1, 2],
+    [-1, -2],
   ];
 
   return offsets
@@ -33,9 +39,10 @@ const KnightChessboard = () => {
           return (
             <div
               key={`${row}-${col}`}
+              data-testid={`cell-${row}-${col}`}
               className={`cell ${isLight ? "light-square" : "dark-square"} 
-                          ${isHovered ? "selected-square" : ""} 
-                          ${isMove ? "knight-move-target" : ""}`}
+              ${isHovered ? "selected-square" : ""} 
+              ${isMove ? "knight-move-target" : ""}`}
               onMouseEnter={() => setHovered([row, col])}
               onMouseLeave={() => setHovered(null)}
             >
