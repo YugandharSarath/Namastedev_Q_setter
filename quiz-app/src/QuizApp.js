@@ -1,8 +1,38 @@
 import React, { useState } from "react";
-import Question from "./components/Question";
-import Score from "./components/Score";
-import { qBank } from "./data/qBank";
 import "./styles.css";
+
+export const qBank = [
+  {
+    id: 1,
+    question: "What is the capital of Haryana?",
+    options: ["Yamunanagar", "Panipat", "Gurgaon", "Chandigarh"],
+    answer: "Chandigarh",
+  },
+  {
+    id: 2,
+    question: "What is the capital of Punjab?",
+    options: ["Patiala", "Ludhiana", "Amritsar", "Chandigarh"],
+    answer: "Chandigarh",
+  },
+  {
+    id: 3,
+    question: "What is the capital of India?",
+    options: ["Delhi", "Mumbai", "Kolkata", "Chennai"],
+    answer: "Delhi",
+  },
+  {
+    id: 4,
+    question: "What is the capital of Uttarakhand?",
+    options: ["Roorkee", "Haridwar", "Dehradun", "Nanital"],
+    answer: "Dehradun",
+  },
+  {
+    id: 5,
+    question: "What is capital of Uttar Pradesh?",
+    options: ["GB Nagar", "Lucknow", "Prayagraj", "Agra"],
+    answer: "Lucknow",
+  },
+];
 
 export default function QuizApp() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -39,15 +69,38 @@ export default function QuizApp() {
   return (
     <div className="App">
       <h1 className="app-title">Quiz App</h1>
+
       {!quizEnd ? (
-        <Question
-          question={qBank[currentQuestionIndex]}
-          selectedOption={selectedOption}
-          onOptionChange={handleOptionChange}
-          onSubmit={handleSubmit}
-        />
+        <form onSubmit={handleSubmit} className="question-container">
+          <h3>Question {qBank[currentQuestionIndex].id}</h3>
+          <p>{qBank[currentQuestionIndex].question}</p>
+          <div className="options">
+            {qBank[currentQuestionIndex].options.map((opt, idx) => (
+              <label key={idx} className="option">
+                <input
+                  type="radio"
+                  name="option"
+                  value={opt}
+                  checked={selectedOption === opt}
+                  onChange={handleOptionChange}
+                />
+                {opt}
+              </label>
+            ))}
+          </div>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
+        </form>
       ) : (
-        <Score score={score} total={qBank.length} onRestart={resetQuiz} />
+        <div className="score-container">
+          <h2>
+            Your Score: {score} / {qBank.length}
+          </h2>
+          <button onClick={resetQuiz} className="restart-button">
+            Play Again
+          </button>
+        </div>
       )}
     </div>
   );

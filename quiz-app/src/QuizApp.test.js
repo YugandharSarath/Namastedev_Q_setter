@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
-import { qBank } from './data/qBank';
+import { qBank } from './QuizApp';
 import '@testing-library/jest-dom';
 
 // Helper to answer all questions correctly
