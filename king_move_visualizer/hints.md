@@ -5,27 +5,33 @@
 
 ### 1. 🧱 Render the 8×8 Chessboard
 
-Use nested loops to render exactly 64 squares:
+Use nested loops to create 64 cells:
 
 ```jsx
 for (let row = 0; row < 8; row++) {
   for (let col = 0; col < 8; col++) {
-    // Render each cell with a key and class
+    // Render each square here
   }
 }
+```
+
+Alternate the colors using:
+
+```js
+const isLight = (row + col) % 2 === 0;
 ```
 
 ---
 
 ### 2. 🎯 Track the Hovered Cell
 
-Use `useState` to store the currently hovered cell:
+Use the `useState` hook to store which square is currently hovered:
 
 ```js
 const [hovered, setHovered] = useState(null);
 ```
 
-Set it on hover:
+Set this value on mouse events:
 
 ```jsx
 onMouseEnter={() => setHovered([row, col])}
@@ -34,35 +40,62 @@ onMouseLeave={() => setHovered(null)}
 
 ---
 
-### 3. ♔ Calculate King Moves
+### 3. ♔ Calculate Valid King Moves
 
-The King moves to all 8 adjacent squares. Use:
+A King can move one square in any direction — horizontal, vertical, or diagonal.
+
+To check if a square is a valid move from the hovered square:
 
 ```js
-const dr = Math.abs(hovered[0] - row);
-const dc = Math.abs(hovered[1] - col);
-return (dr <= 1 && dc <= 1) && !(dr === 0 && dc === 0);
+const dr = Math.abs(hr - row);
+const dc = Math.abs(hc - col);
+return !isHoveredSquare(row, col) && dr <= 1 && dc <= 1;
 ```
+
+This ensures:
+
+* The hovered square isn’t included.
+* Only the 8 surrounding squares are considered valid king moves.
 
 ---
 
-### 4. 💡 Apply Highlight Classes
+### 4. 🎨 Apply CSS Classes Dynamically
 
-Add these conditionally to each cell:
+Build the class string based on square type:
+
+```js
+let cellClasses = `cell ${isLight ? "light" : "dark"}`;
+if (isHoveredSquare(row, col)) {
+  cellClasses += " hovered";
+} else if (isKingMove(row, col)) {
+  cellClasses += " king-move";
+}
+```
+
+This allows proper coloring and highlighting using CSS.
+
+---
+
+### 5. 👑 Render the King Piece
+
+Only show the King icon on the hovered square:
 
 ```jsx
-className={`cell ${isHovered ? "hovered" : ""} ${isKingMove ? "king-move" : ""}`}
+{isHoveredSquare(row, col) && <span className="king-icon">♔</span>}
 ```
+
+This keeps the king centered and visible only when a cell is hovered.
 
 ---
 
-### 5. ♿ Accessibility
+### 6. 🧪 Testing Helpers
 
-Add `role="gridcell"` to each cell:
+Each cell includes a test ID to help with unit testing:
 
 ```jsx
-<div role="gridcell" className="cell">...</div>
+data-testid={`cell-${row}-${col}`}
 ```
 
----
+This enables precise cell targeting in tests.
 
+---
