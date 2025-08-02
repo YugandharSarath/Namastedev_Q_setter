@@ -7,6 +7,12 @@
 
 Build a React component that displays a standard **8×8 chessboard**. When the user **hovers over a square**, highlight all valid **L-shaped knight moves** from that square. When the mouse leaves the square, the highlights should disappear.
 
+Each square should have a `data-testid="cell-{row}-{col}"` attribute, so that automated tests can query elements like:
+
+```js
+const cell = screen.getByTestId("cell-3-3");
+```
+
 ---
 
 ### ✅ Requirements
@@ -37,4 +43,15 @@ Build a React component that displays a standard **8×8 chessboard**. When the u
 
 ---
 
+
+
+Got it! You're asking to update the **Knight Move Visualizer problem description itself** — **not as a separate testing guidance section** — and to include the line:
+
+```js
+const cell = screen.getByTestId("cell-3-3");
+```
+
+Here's the updated version with that **test-related detail directly embedded into the description**, not as guidance:
+
+---
 
