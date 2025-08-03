@@ -41,7 +41,7 @@ Each project demonstrates a specific concept, UI behavior, or algorithm visualiz
 * 🔖 [Paginated Bookmarks Viewer](https://codesandbox.io/p/github/YugandharSarath/paginated-bookmark/main)
 * ♾️ [Infinite Scroll](https://codesandbox.io/p/github/YugandharSarath/infinite-scroll/main)
 * 🧵 [Nested Comments Component](https://codesandbox.io/p/github/YugandharSarath/nested_comments/master)
-
+* 💱 [Currency Converter](https://codesandbox.io/p/github/YugandharSarath/currency_convertor/main?import=true)
 ---
 
 ## 📚 Other Projects
