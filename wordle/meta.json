@@ -1,0 +1,29 @@
+{
+  "title": "React Wordle Game",
+  "description": "A Wordle clone built with React, featuring keyboard input, color-coded hints, error handling, and game state logic.",
+  "features": [
+    "5-letter word guessing",
+    "Virtual and physical keyboard input",
+    "Turn-based guessing with 6 tries",
+    "Color-coded tile feedback (green/yellow/gray)",
+    "Hint system after 3 incorrect guesses",
+    "New Game reset button",
+    "Error handling for invalid inputs"
+  ],
+  "dependencies": [
+    "react",
+    "react-dom",
+    "jest",
+    "@testing-library/react",
+    "@testing-library/jest-dom"
+  ],
+  "test_coverage": {
+    "total_tests": 5,
+    "passed": 5,
+    "coverage": "Core functionality covered"
+  },
+  "api_used": "https://random-word-api.herokuapp.com",
+  "companies_asked": ["Tata Digital", "Paytm", "CureFit", "Razorpay"],
+  "duration": 60,
+  "difficulty_level": "Medium"
+}

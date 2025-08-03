@@ -1,0 +1,148 @@
+/* Enhanced Wordle UI */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121213;
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+h1 {
+  margin-top: 2rem;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.board {
+  margin: 2rem auto;
+  display: grid;
+  gap: 12px;
+  width: max-content;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #3a3a3c;
+  background-color: #121213;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: all 0.25s ease-in-out;
+}
+
+.tile.green {
+  background-color: #538d4e;
+  border-color: #538d4e;
+  color: white;
+}
+
+.tile.yellow {
+  background-color: #b59f3b;
+  border-color: #b59f3b;
+  color: white;
+}
+
+.tile.gray {
+  background-color: #3a3a3c;
+  border-color: #3a3a3c;
+  color: white;
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.key {
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #818384;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.key.green {
+  background: #538d4e;
+}
+
+.key.yellow {
+  background: #b59f3b;
+}
+
+.key.gray {
+  background: #3a3a3c;
+}
+
+.result {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background: #1a1a1b;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.error {
+  color: #ff4d4f;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+button.new-game {
+  margin-top: 1rem;
+  background: #2563eb;
+  color: white;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button.new-game:hover {
+  background: #1e40af;
+}
+
+.toggle-mode {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #3a3a3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toggle-mode:hover {
+  background: #555;
+}
