@@ -1,0 +1,54 @@
+{
+  "title": "International to INR Currency Converter",
+  "description": "Build a currency converter that fetches real-time exchange rates and converts from any international currency to Indian Rupees (INR) with a clean UI and robust test coverage.",
+  "author": "Sarath V",
+  "version": "1.0.0",
+  "technologies": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Jest",
+    "React Testing Library"
+  ],
+  "features": [
+    "Dropdown for selecting source currency",
+    "Amount input field",
+    "Live conversion to INR using Frankfurter API",
+    "Swap currencies feature",
+    "Favorite currency selection",
+    "Clear and responsive UI",
+    "Unit tests for rendering and conversion logic"
+  ],
+  "components": [
+    "CurrencyConverter.js (includes dropdown)",
+    "CurrencyConverter.css"
+  ],
+  "testCoverage": true,
+  "tests": [
+    "Renders all UI components",
+    "Fetches and lists currencies",
+    "Handles valid and invalid conversion",
+    "Covers UI interaction flows (click, input, swap)"
+  ],
+  "tags": [
+    "currency",
+    "converter",
+    "INR",
+    "real-time rates",
+    "frontend project",
+    "react",
+    "api-integration"
+  ],
+  "license": "MIT",
+  "companiesAsked": [
+    "TCS",
+    "Wipro",
+    "Infosys",
+    "Cognizant",
+    "Capgemini",
+    "Accenture"
+  ],
+  "difficulty": "Easy",
+  "duration": "60 minutes"
+}
