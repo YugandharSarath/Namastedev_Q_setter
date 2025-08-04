@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 function getColumns() {
   return {
     todo: screen.getByText(/todo/i).parentElement,
-    inprogress: screen.getByText(/inprogress/i).parentElement,
+    inprogress: screen.getByText(/in progress/i).parentElement, 
     done: screen.getByText(/done/i).parentElement,
   };
 }
@@ -26,7 +26,7 @@ test("renders the initial list of items", () => {
 test("drag and drop moves a task to another column", () => {
   render(<DragAndDropList />);
   const task = screen.getByText("Task 1");
-  const { inprogress } = getColumns();
+  const { inprogress } = getColumns(); 
   fireEvent.dragStart(task);
   fireEvent.dragOver(inprogress);
   fireEvent.drop(inprogress);
@@ -47,13 +47,13 @@ test("dropping outside valid list does not break anything", () => {
   render(<DragAndDropList />);
   const task = screen.getByText("Task 1");
   fireEvent.dragStart(task);
-  fireEvent.dragEnd(task); // Simulate drop outside
+  fireEvent.dragEnd(task); 
   expect(screen.getByText("Task 1")).toBeInTheDocument();
 });
 
 test("dragging multiple items and dropping them reorders correctly", () => {
   render(<DragAndDropList />);
-  const { inprogress, done } = getColumns();
+  const { inprogress, done } = getColumns(); 
   const task1 = screen.getByText("Task 1");
   const task2 = screen.getByText("Task 2");
 
@@ -72,6 +72,6 @@ test("dragging multiple items and dropping them reorders correctly", () => {
 test("columns have headings for accessibility", () => {
   render(<DragAndDropList />);
   expect(screen.getByRole("heading", { name: /todo/i })).toBeInTheDocument();
-  expect(screen.getByRole("heading", { name: /inprogress/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /in progress/i })).toBeInTheDocument(); // Changed to 'in progress'
   expect(screen.getByRole("heading", { name: /done/i })).toBeInTheDocument();
 });

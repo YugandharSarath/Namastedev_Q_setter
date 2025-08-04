@@ -6,7 +6,7 @@ const initialData = {
     { id: "task-1", label: "Task 1" },
     { id: "task-2", label: "Task 2" },
   ],
-  inprogress: [{ id: "task-3", label: "Task 3" }],
+  "in progress": [{ id: "task-3", label: "Task 3" }], 
   done: [{ id: "task-4", label: "Task 4" }],
 };
 
@@ -37,7 +37,7 @@ const DragAndDropList = () => {
 
   return (
     <div className="board">
-      {["todo", "inprogress", "done"].map((col) => (
+      {["todo", "in progress", "done"].map((col) => ( // Changed from 'inprogress'
         <div
           key={col}
           className="column"
