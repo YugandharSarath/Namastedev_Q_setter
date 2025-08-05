@@ -24,24 +24,20 @@
 - [ ] Click Convert
 - [ ] Converted value is displayed
 
-## ✅ 4. Favorite Toggle Test
-**Description**: Check favorite button functionality.
-- [ ] Click favorite icon next to a currency
-- [ ] Verify that currency appears with special styling or on top
 
-## ✅ 5. Swap Functionality Test
+## ✅ 4. Swap Functionality Test
 **Description**: Ensure "From" and "To" currencies are swapped correctly.
 - [ ] Set `From = USD`, `To = INR`
 - [ ] Click swap
 - [ ] `From = INR`, `To = USD`
 
-## ✅ 6. Invalid Input Test
+## ✅ 5. Invalid Input Test
 **Description**: Prevent conversion with invalid amount.
 - [ ] Leave amount field empty
 - [ ] Click Convert
 - [ ] Error or no result shown
 
-## ✅ 7. Loading & Error Handling
+## ✅ 6. Loading & Error Handling
 **Description**: Check for fetch or network failures.
 - [ ] Simulate API failure using mock reject
 - [ ] Display error message gracefully

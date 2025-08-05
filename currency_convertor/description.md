@@ -25,8 +25,6 @@ Build a **Currency Converter web app** where users can:
 * Handle API errors (e.g., if the network fails).
 * If the source currency is already INR, show the same amount.
 * Limit conversions only *to* INR (fixed target).
-* Avoid duplicate currencies in dropdown if using favorites.
-* Ensure favorites are saved in localStorage.
 * The app should default to common currencies like USD, EUR, etc.
 
 ---

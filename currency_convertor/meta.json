@@ -16,7 +16,6 @@
     "Amount input field",
     "Live conversion to INR using Frankfurter API",
     "Swap currencies feature",
-    "Favorite currency selection",
     "Clear and responsive UI",
     "Unit tests for rendering and conversion logic"
   ],

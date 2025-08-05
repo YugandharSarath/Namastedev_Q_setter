@@ -7,12 +7,8 @@ const CurrencyDropdown = ({
   currencies,
   currency,
   setCurrency,
-  favorites,
-  handleFavorite,
   title = "",
 }) => {
-  const isFavorite = (curr) => favorites.includes(curr);
-
   return (
     <div>
       <label
@@ -29,26 +25,13 @@ const CurrencyDropdown = ({
           onChange={(e) => setCurrency(e.target.value)}
           className="select-field"
         >
-          {favorites.map((currency) => (
-            <option className="favorite-option" value={currency} key={currency}>
-              {currency}
-            </option>
-          ))}
           {currencies
-            .filter((c) => !favorites.includes(c))
             .map((currency) => (
               <option value={currency} key={currency}>
                 {currency}
               </option>
             ))}
         </select>
-
-        <button
-          onClick={() => handleFavorite(currency)}
-          className="favorite-button"
-        >
-          {isFavorite(currency) ? <HiStar /> : <AiOutlineStar />}
-        </button>
       </div>
     </div>
   );
@@ -61,9 +44,6 @@ const CurrencyConverter = () => {
   const [toCurrency, setToCurrency] = useState("INR");
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [converting, setConverting] = useState(false);
-  const [favorites, setFavorites] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || ["INR", "EUR"]
-  );
 
   const fetchCurrencies = async () => {
     try {
@@ -95,17 +75,6 @@ const CurrencyConverter = () => {
     }
   };
 
-  const handleFavorite = (currency) => {
-    let updatedFavorites = [...favorites];
-    if (favorites.includes(currency)) {
-      updatedFavorites = updatedFavorites.filter((fav) => fav !== currency);
-    } else {
-      updatedFavorites.push(currency);
-    }
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-  };
-
   const swapCurrencies = () => {
     setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
@@ -117,12 +86,10 @@ const CurrencyConverter = () => {
 
       <div className="grid-row">
         <CurrencyDropdown
-          favorites={favorites}
           currencies={currencies}
           title="From:"
           currency={fromCurrency}
           setCurrency={setFromCurrency}
-          handleFavorite={handleFavorite}
         />
         <div className="swap-button-wrapper">
           <button onClick={swapCurrencies} className="swap-button">
@@ -130,12 +97,10 @@ const CurrencyConverter = () => {
           </button>
         </div>
         <CurrencyDropdown
-          favorites={favorites}
           currencies={currencies}
           currency={toCurrency}
           setCurrency={setToCurrency}
           title="To:"
-          handleFavorite={handleFavorite}
         />
       </div>
 

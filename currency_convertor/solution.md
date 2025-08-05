@@ -13,7 +13,6 @@ This project implements a currency converter using React. It fetches real-time e
 - **Swap button** to switch selected currencies
 - **Amount input** field
 - **Convert button** to trigger conversion
-- **Favorite toggle** to mark a currency as preferred
 
 ### ⚙️ Conversion Logic
 

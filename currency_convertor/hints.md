@@ -85,17 +85,8 @@ if (from === 'INR') {
 
 ---
 
-### 6. 💾 (Optional) Store Favorites in localStorage
 
-You can let users "star" or save favorite currencies:
-
-```js
-localStorage.setItem('favoriteCurrencies', JSON.stringify(['USD', 'EUR']));
-```
-
----
-
-### 7. 🎨 Apply Basic Styling
+### 6. 🎨 Apply Basic Styling
 
 Don't forget to keep the UI clean:
 
