@@ -1,51 +1,100 @@
 
+
 ---
 
-## ⬆️ **Project: Drag and Drop Task Board**
+## ⬆️ **Project: Smart Kanban Task Board (with Native Drag & Drop)**
 
 ---
 
 ### ❓ **Question**
 
-Create a **simple Kanban-style task board** in React (without any external drag libraries), where tasks can be **dragged and dropped** between three columns — **To Do**, **In Progress**, and **Done**. Ensure it works with native HTML5 drag-and-drop and reflects changes immediately.
+Build a **Kanban-style task board** in React that supports **native HTML5 drag-and-drop** without external libraries. The board should have three columns — **To Do**, **In Progress**, and **Done** — where users can:
+
+* Drag and drop tasks between columns.
+* Add new tasks.
+* Edit task labels inline.
+* Delete tasks.
+
+Each task card should have the CSS class: className="task".
+
+The UI must be responsive, interactive, and reflect changes immediately via state updates.
 
 ---
 
 ### ✅ **Functional Requirements**
 
-1.  **Column Setup**
+#### 1. Column Setup
 
-    * The UI should have three labeled columns: *To Do*, *In Progress*, and *Done*.
-    * Each column should hold one or more task cards.
+* The UI must have **three labeled columns**:
 
-2.  **Drag and Drop Behavior**
+  * **To Do**
+  * **In Progress**
+  * **Done**
+* Each column displays **zero or more task cards**.
+* Each column must contain an accessible `<h4>` heading (for screen readers).
 
-    * Users should be able to drag a task card from one column and drop it into another.
-    * When dropped, the task must be removed from the original column and appended to the new one.
-    * The DOM should reflect the updated structure instantly after drop.
+#### 2. Drag and Drop Behavior
 
-3.  **State Handling**
+* Tasks can be **dragged from one column and dropped into another** using HTML5 drag events.
+* After a successful drop:
 
-    * Task movement must be handled via React `useState`.
-    * State should not mutate directly — always create a copy and update appropriately.
+  * The task should be **removed from the source column**.
+  * It should be **appended to the end of the target column**.
+* Dragging into the **same column** should not duplicate or move the task.
+* **Dropping outside** a valid column should not crash or corrupt the UI.
 
-4.  **Initial Render**
+#### 3. Add Task
 
-    * The board should render with 4 predefined tasks distributed across the three columns.
-    * **Note:** Do not modify the `initialData` object in `DragAndDropList.js`, as it is used for testing the initial state.
+* A **"+ Add a task"** button should be present **only in the "To Do" column**.
+* Clicking it reveals an inline text input.
+* Pressing `Enter` or blurring the input should **add the task** at the end of the column.
+* Input should clear and close after submission.
 
-5.  **Accessibility**
+#### 4. Edit Task
 
-    * Each column must have an accessible `<h3>` heading (used in screen reader validation).
+* Clicking on a task label should turn it into an **editable input field**.
+* Pressing `Enter` or blurring the input should **save the new label**.
+* Escaping the field or submitting empty input should discard changes.
+
+#### 5. Delete Task
+
+* Each task should have a **trash icon (🗑️)** to delete it.
+* Clicking the icon should remove the task from its column immediately.
+
+#### 6. State Handling
+
+* Use React’s `useState` to manage column data.
+* **Never mutate state directly** — always copy and return updated objects.
+* Task IDs should be unique (e.g., `task-${Date.now()}`).
+
+#### 7. Initial Render
+
+* The board should render with **4 predefined tasks** distributed across the three columns.
+
+✅ **Note**: Do **not modify the `initialData` object** defined in `DragAndDropList.js`, as it is used for **test validation**. You may only update state derived from it.
 
 ---
 
 ### ⚠️ **Edge Cases & Constraints**
 
-* **Drop in same column**: Dropping a task back into the same column must not duplicate or move the item.
-* **Drop outside any column**: UI should not crash or misbehave if a task is dragged but not dropped in a valid zone.
-* **Multiple task moves**: Moving tasks multiple times should preserve their order and correct state.
-* **Single task column**: A column with one task should still support dragging and dropping.
-* **Visual Position**: Tasks are always added at the end of the destination column, not reordered internally.
+* ✅ Dropping into the **same column** should preserve order and avoid duplication.
+* ✅ Dropping **outside a column** should have no effect.
+* ✅ **Multiple moves** must be supported and reflected accurately.
+* ✅ A column with **just one task** should still support drag and drop.
+* ✅ Tasks are always added to the **end** of the target column.
+* ✅ Initial task distribution:
+
+  * e.g., `Task 1`, `Task 2` in To Do, `Task 3` in In Progress, `Task 4` in Done.
+* Each task card must include className="task" for semantic styling and testing.
 
 ---
+
+### 🧪 **Bonus (if implemented)**
+
+* ✅ Optional keyboard accessibility
+* ✅ CSS transitions, hover effects
+* ✅ `data-testid` or semantic classes for automated test hooks
+
+---
+
+

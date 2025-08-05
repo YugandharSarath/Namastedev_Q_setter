@@ -1,12 +1,24 @@
 {
-  "title": "Drag and Drop List",
-  "language": "TypeScript",
-  "framework": "React",
-  "difficulty": "Intermediate",
-  "tags": ["react", "typescript", "drag-and-drop", "html5", "frontend", "ui"],
-  "dependencies": [],
-  "entry": "DragAndDropList.tsx",
-  "description": "A drag-and-drop list in React using native HTML5 Drag and Drop API without external libraries.",
-  "companies": ["Atlassian", "Jira", "Monday.com"],
-  "Time": "45-60 min"
+  "title": "Kanban Drag and Drop Task Board",
+  "id": "kanban-dnd-board",
+
+  "difficulty": "Medium",
+  "tags": [
+    "React",
+    "HTML5 Drag and Drop",
+    "State Management",
+    "UI Design",
+    "Accessibility"
+  ],
+  "notes": "Avoid using libraries like react-beautiful-dnd. Focus on native HTML5 drag-and-drop and clean React state updates.",
+  "topics": [
+    "React Hooks",
+    "Drag and Drop API",
+    "Dynamic Rendering",
+    "Conditional Input",
+    "State Copying",
+    "Event Handling"
+  ],
+  "companies": ["Google", "Amazon", "Atlassian", "Razorpay"],
+  "duration": "45-60 mins"
 }
