@@ -1,0 +1,23 @@
+{
+  "project": "Matching Colors Game",
+  "version": "1.0.0",
+  "description": "A browser-based memory game where players match pairs of colored cards.",
+  "author": "Yugandhar Sarath",
+  "email": "yugandhar.sarath53@gmail.com",
+  "repository": "git@github.com:YugandharSarath/quiz_app.git",
+  "techStack": ["React", "JavaScript", "CSS"],
+  "features": [
+    "Game board with a 4x4 grid",
+    "Randomized card shuffling on initialization",
+    "Card flipping and matching logic",
+    "Visual state for revealed and matched cards",
+    "Move counter",
+    "Win detection and congratulatory message",
+    "Game reset functionality"
+  ],
+  "status": "completed",
+  "lastUpdated": "2025-08-06T19:00:00+05:30",
+  "duration": "1-2 hours",
+  "companiesAsked": ["Amazon", "Google", "Microsoft"],
+  "difficulty": "Beginner"
+}
