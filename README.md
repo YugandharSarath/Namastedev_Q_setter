@@ -24,6 +24,8 @@ Each project demonstrates a specific concept, UI behavior, or algorithm visualiz
 * 🔢 [Captcha Generator](https://codesandbox.io/p/github/YugandharSarath/captcha/main)
 * 🔳 [Sudoku Game](https://codesandbox.io/p/github/YugandharSarath/sudoku/main)
 * 🟩 [Wordle Clone](https://codesandbox.io/p/github/YugandharSarath/wordle/main)
+* 🟥 [Match Color Game](https://codesandbox.io/p/github/YugandharSarath/match-color-game/main)
+* 🃏 [UNO](https://codesandbox.io/p/github/YugandharSarath/uno/main)
 
 ---
 
