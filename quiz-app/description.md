@@ -1,54 +1,123 @@
 
 ---
+
 ## ❓ Quiz App Specification
 
 ### 🧠 Goal
 
-Create an interactive quiz where users answer **multiple-choice questions (MCQs) one by one**, get their **final score**, and can **restart** the quiz.
+Create an interactive quiz where users answer **multiple-choice questions (MCQs) one by one**, view their **final score**, and can **restart** the quiz using a **“Play Again”** button.
+
 ---
 
-### ✅ Features (Explained)
+### ✅ Features (Fully Updated)
 
-- **One question at a time**
-  The quiz displays only a single question on the screen. Users must answer the current question to move to the next. This ensures a focused and clean interface.
+* **One question at a time**
+  Only a single question is shown on the screen at any time. Users must select an answer and click **Submit** to proceed.
 
-- **Options shown as radio buttons**
-  Each question has multiple options displayed as radio buttons. The user can select only **one** option per question.
+* **Options shown as radio buttons**
+  Each question offers 4 options (A–D) displayed as **radio buttons**. Users can only select **one option** per question.
 
-- **Final score display after last question**
-  Once the user has answered all questions, the app displays a summary showing the total number of correct answers out of the total number of questions.
+* **Submit button must be clicked to continue**
+  A **Submit** button must be present and labeled exactly as `"Submit"`.
+  Users must click this button to progress through questions.
 
-- **"Play Again" resets the entire quiz**
-  A "Restart" or "Play Again" button appears after the quiz ends. Clicking it will reset:
+  ✅ Test:
 
-  - The current question index back to 0
-  - The score to 0
-  - All selected answers
+  ```js
+  fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+  ```
 
-- **Prevents submission if no option is selected**
-  Users cannot move to the next question or submit an answer unless they have selected an option. This ensures intentional participation and prevents accidental clicks.
+* **Prevent submission without a selected option**
+  If the user tries to submit without selecting an answer:
+
+  * Display a **warning message** visibly in red.
+  * Prevent moving to the next question.
+
+  ✅ Example:
+
+  ```jsx
+  {warning && (
+    <p className="warning" style={{ color: 'red' }}>
+      Please select an option before submitting.
+    </p>
+  )}
+  ```
+
+* **Final score is shown after the last question**
+  After all questions have been answered, display the user’s score in the format:
+
+  ```
+  Your Score: X / Y
+  ```
+
+  This result should be accessible using the test ID `score`.
+
+* **Quiz can be restarted using a “Play Again” button**
+  When the quiz ends, a **"Play Again"** button must be displayed.
+  Clicking it must reset:
+
+  * Score back to 0
+  * Current question index to 0
+  * Selected option to empty
+  * Warning message cleared
+  * All UI returned to initial state
+
+  The "Play Again" button must use the test ID `"restart-button"`.
+
+* **The quiz title must be clearly visible**
+  The app must render a visible heading labeled `"Quiz App"`.
+  ✅ Test:
+
+  ```js
+  expect(screen.getByText(/quiz app/i)).toBeInTheDocument();
+  ```
+
+* **Quiz data (questions) should be passed as a prop**
+  The quiz component must receive a `questions` prop (not hardcoded).
+  Example:
+
+  ```jsx
+  <QuizApp questions={qBank} />
+  ```
 
 ---
 
 ### 📚 Edge Case Handling
 
-- If **no questions** are available in the data set, show a message like:
-  _“No quiz available”_
+* ✅ If the quiz data (`questions`) array is empty, render a message like:
 
-- If the user **tries to submit without selecting any option**, show a warning and block progression.
+  ```
+  No quiz available
+  ```
 
-- When the user clicks **“Play Again”**, all quiz states (score, selected answers, current question) should be reset.
+* ✅ If the user clicks Submit without selecting an option:
 
-- Ensure **radio buttons** allow only one option to be selected at a time.
+  * A red warning is shown
+  * User cannot proceed
+
+* ✅ When clicking “Play Again”:
+
+  * The score, selected answers, and question index must be reset
+
+* ✅ Only one radio option may be selected at any time
 
 ---
 
-### Suggested Test IDs (in sentence format)
+### 🧪 Data Test IDs (In Sentence Format)
 
-- The **question text** should have a `data-testid` of `"question"`.
-- The **first option (Option A)** should use `data-testid="option-A"`.
-- The **second option (Option B)** should use `data-testid="option-B"`.
-- The **third option (Option C)** should use `data-testid="option-C"`.
-- The **fourth option (Option D)** should use `data-testid="option-D"`.
-- The **final score display** should use `data-testid="score"`.
-- The **restart button** should use `data-testid="restart-button"`.
+1. The **main question text** must use the test ID: `"question"`.
+
+2. The **first option (Option A)** must use the test ID: `"option-A"`.
+
+3. The **second option (Option B)** must use the test ID: `"option-B"`.
+
+4. The **third option (Option C)** must use the test ID: `"option-C"`.
+
+5. The **fourth option (Option D)** must use the test ID: `"option-D"`.
+
+6. The **final score display text** must use the test ID: `"score"`.
+
+7. The **"Play Again" button** that appears after the quiz ends must use the test ID: `"restart-button"`.
+
+---
+

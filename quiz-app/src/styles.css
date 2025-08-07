@@ -1,4 +1,3 @@
-// styles.css
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -14,36 +13,51 @@
 .score-container {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.5rem;
   max-width: 500px;
   margin: 0 auto;
   background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .options {
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+  gap: 0.5rem;
+  align-items: flex-start;
 }
 
 .option {
-  margin-bottom: 0.5rem;
   font-size: 1rem;
-  text-align: left;
+  cursor: pointer;
+}
+
+.option input {
+  margin-right: 0.5rem;
 }
 
 .submit-button,
 .restart-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.25rem;
   background-color: #007bff;
   color: white;
   border: none;
+  font-size: 1rem;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .submit-button:hover,
 .restart-button:hover {
   background-color: #0056b3;
+}
+
+.warning {
+  color: red;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 0.95rem;
 }

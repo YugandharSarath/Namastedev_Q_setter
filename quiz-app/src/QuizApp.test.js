@@ -1,88 +1,126 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
-import { qBank } from './QuizApp';
-import '@testing-library/jest-dom';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import QuizApp from "./QuizApp";
+import "@testing-library/jest-dom";
+
+// Custom testQBank for testing (Point #5)
+const testQBank = [
+  {
+    question: "Test Question 1?",
+    options: ["Alpha", "Beta", "Gamma", "Delta"],
+    answer: "Beta",
+  },
+  {
+    question: "Test Question 2?",
+    options: ["Red", "Green", "Blue", "Yellow"],
+    answer: "Green",
+  },
+];
 
 // Helper to answer all questions correctly
-function answerAllQuestionsCorrectly() {
+function answerAllQuestionsCorrectly(qBank) {
   qBank.forEach((q) => {
-    const option = screen.getByLabelText(q.answer);
-    fireEvent.click(option);
-    const submitBtn = screen.getByRole('button', { name: /submit/i });
-    fireEvent.click(submitBtn);
+    fireEvent.click(screen.getByLabelText(q.answer));
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
   });
 }
 
-describe('Quiz App', () => {
-  test('renders the first question and options', () => {
-    render(<App />);
+describe("Quiz App", () => {
+  test("renders heading and first question with testIDs", () => {
+    render(<QuizApp questions={testQBank} />);
     expect(screen.getByText(/quiz app/i)).toBeInTheDocument();
-    expect(screen.getByText(qBank[0].question)).toBeInTheDocument();
-    qBank[0].options.forEach((opt) => {
-      expect(screen.getByLabelText(opt)).toBeInTheDocument();
-    });
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+    expect(screen.getByTestId("question")).toHaveTextContent(
+      testQBank[0].question
+    );
+    expect(screen.getByTestId("option-A")).toHaveTextContent(
+      testQBank[0].options[0]
+    );
+    expect(screen.getByTestId("option-B")).toHaveTextContent(
+      testQBank[0].options[1]
+    );
+    expect(screen.getByTestId("option-C")).toHaveTextContent(
+      testQBank[0].options[2]
+    );
+    expect(screen.getByTestId("option-D")).toHaveTextContent(
+      testQBank[0].options[3]
+    );
   });
 
-  test('selecting an option enables submission and moves to next question', () => {
-    render(<App />);
-    const option = screen.getByLabelText(qBank[0].options[0]);
-    fireEvent.click(option);
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
-    expect(screen.getByText(qBank[1].question)).toBeInTheDocument();
+  test("selecting an option enables submission and moves to next question", () => {
+    render(<QuizApp questions={testQBank} />);
+    fireEvent.click(screen.getByLabelText(testQBank[0].options[0]));
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+    expect(screen.getByTestId("question")).toHaveTextContent(
+      testQBank[1].question
+    );
   });
 
-  test('score increases for correct answers', () => {
-    render(<App />);
-    fireEvent.click(screen.getByLabelText(qBank[0].answer));
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+  test("score increases for correct answers", () => {
+    render(<QuizApp questions={testQBank} />);
+    fireEvent.click(screen.getByLabelText(testQBank[0].answer));
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
 
-    const wrongOption = qBank[1].options.find((opt) => opt !== qBank[1].answer);
+    const wrongOption = testQBank[1].options.find(
+      (opt) => opt !== testQBank[1].answer
+    );
     fireEvent.click(screen.getByLabelText(wrongOption));
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
-
-    for (let i = 2; i < qBank.length; i++) {
-      fireEvent.click(screen.getByLabelText(qBank[i].answer));
-      fireEvent.click(screen.getByRole('button', { name: /submit/i }));
-    }
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
 
     expect(
-      screen.getByText(new RegExp(`your score: ${qBank.length - 1} / ${qBank.length}`, 'i'))
+      screen.getByText(
+        new RegExp(
+          `your score: ${testQBank.length - 1} / ${testQBank.length}`,
+          "i"
+        )
+      )
     ).toBeInTheDocument();
   });
 
-  test('shows final score and restart button after last question', () => {
-    render(<App />);
-    answerAllQuestionsCorrectly();
-    expect(screen.getByText(/your score:/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /play again/i })).toBeInTheDocument();
+  test("shows final score and play again button with testID", () => {
+    render(<QuizApp questions={testQBank} />);
+    answerAllQuestionsCorrectly(testQBank);
+    expect(screen.getByTestId("score")).toHaveTextContent(
+      `Your Score: ${testQBank.length} / ${testQBank.length}`
+    );
+    expect(screen.getByTestId("restart-button")).toBeInTheDocument();
   });
 
-  test('restarts the quiz when Play Again is clicked', () => {
-    render(<App />);
-    answerAllQuestionsCorrectly();
-    fireEvent.click(screen.getByRole('button', { name: /play again/i }));
-    expect(screen.getByText(qBank[0].question)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+  test("play again button resets the quiz", () => {
+    render(<QuizApp questions={testQBank} />);
+    answerAllQuestionsCorrectly(testQBank);
+    fireEvent.click(screen.getByTestId("restart-button"));
+    expect(screen.getByTestId("question")).toHaveTextContent(
+      testQBank[0].question
+    );
+    expect(screen.getByRole("button", { name: /submit/i })).toBeInTheDocument();
   });
 
-  test('radio buttons reflect selected option', () => {
-    render(<App />);
-    const selectedOption = screen.getByLabelText(qBank[0].options[2]);
-    fireEvent.click(selectedOption);
-    expect(selectedOption).toBeChecked();
+  test("radio buttons reflect selected option", () => {
+    render(<QuizApp questions={testQBank} />);
+    const selected = screen.getByLabelText(testQBank[0].options[2]);
+    fireEvent.click(selected);
+    expect(selected).toBeChecked();
 
-    qBank[0].options.forEach((opt) => {
-      if (opt !== qBank[0].options[2]) {
+    testQBank[0].options.forEach((opt) => {
+      if (opt !== testQBank[0].options[2]) {
         expect(screen.getByLabelText(opt)).not.toBeChecked();
       }
     });
   });
 
-  test('cannot submit without selecting an option', () => {
-    render(<App />);
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
-    expect(screen.getByText(qBank[0].question)).toBeInTheDocument();
+  test("cannot submit without selecting an option", () => {
+    render(<QuizApp questions={testQBank} />);
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+    expect(screen.getByTestId("question")).toHaveTextContent(
+      testQBank[0].question
+    );
+  });
+
+  test("renders different testQBank properly", () => {
+    render(<QuizApp questions={testQBank} />);
+    expect(screen.getByTestId("question")).toHaveTextContent(
+      testQBank[0].question
+    );
+    expect(screen.getByLabelText(testQBank[0].options[1])).toBeInTheDocument();
   });
 });
