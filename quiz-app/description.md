@@ -9,7 +9,7 @@ Create an interactive quiz where users answer **multiple-choice questions (MCQs)
 
 ---
 
-### ✅ Features (Fully Updated)
+### ✅ Features 
 
 * **One question at a time**
   Only a single question is shown on the screen at any time. Users must select an answer and click **Submit** to proceed.
