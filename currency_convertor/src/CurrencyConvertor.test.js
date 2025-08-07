@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom'; 
 import CurrencyConverter from './CurrencyConvertor';
+import '@testing-library/jest-dom';
 
 global.fetch = jest.fn();
 
@@ -33,8 +33,8 @@ test('renders converter and fetches currencies', async () => {
 
 test('performs currency conversion', async () => {
   fetch
-    .mockResolvedValueOnce({ json: async () => mockCurrencies }) // currencies
-    .mockResolvedValueOnce({ json: async () => mockConversion }); // conversion
+    .mockResolvedValueOnce({ json: async () => mockCurrencies }) 
+    .mockResolvedValueOnce({ json: async () => mockConversion }); 
 
   render(<CurrencyConverter />);
 
@@ -44,11 +44,11 @@ test('performs currency conversion', async () => {
     target: { value: '1' },
   });
 
-  fireEvent.click(screen.getByRole('button', { name: /Convert/i })); // ✅ precise
+  fireEvent.click(screen.getByRole('button', { name: /Convert/i }));
 
   await waitFor(() =>
     expect(
-      screen.getByText(/Converted Amount: 83.55 INR/)
+      screen.getByText(/Converted Amount: ₹83.55/)
     ).toBeInTheDocument()
   );
 });

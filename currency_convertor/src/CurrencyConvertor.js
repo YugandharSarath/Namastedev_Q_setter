@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
-import { HiStar, HiArrowsExpand } from "react-icons/hi";
-import { AiOutlineStar } from "react-icons/ai";
+import { HiArrowsExpand } from "react-icons/hi";
 
-const CurrencyDropdown = ({
-  currencies,
-  currency,
-  setCurrency,
-  title = "",
-}) => {
+const CurrencyDropdown = ({ currencies, currency, setCurrency, title = "", disabled = false }) => {
   return (
     <div>
       <label
@@ -24,13 +18,13 @@ const CurrencyDropdown = ({
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}
           className="select-field"
+          disabled={disabled}
         >
-          {currencies
-            .map((currency) => (
-              <option value={currency} key={currency}>
-                {currency}
-              </option>
-            ))}
+          {currencies.map((currency) => (
+            <option value={currency} key={currency}>
+              {currency}
+            </option>
+          ))}
         </select>
       </div>
     </div>
@@ -41,9 +35,10 @@ const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState([]);
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("INR");
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [converting, setConverting] = useState(false);
+
+  const TO_CURRENCY = "INR"; 
 
   const fetchCurrencies = async () => {
     try {
@@ -51,7 +46,7 @@ const CurrencyConverter = () => {
       const data = await res.json();
       setCurrencies(Object.keys(data));
     } catch (error) {
-      console.error("Error Fetching", error);
+      console.error("Error fetching currencies", error);
     }
   };
 
@@ -61,23 +56,31 @@ const CurrencyConverter = () => {
 
   const convertCurrency = async () => {
     if (!amount) return;
+    if (fromCurrency === "INR") {
+      setConvertedAmount(`${amount}`);
+      return;
+    }
+
     setConverting(true);
     try {
       const res = await fetch(
-        `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`
+        `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${TO_CURRENCY}`
       );
       const data = await res.json();
-      setConvertedAmount(data.rates[toCurrency] + " " + toCurrency);
+      setConvertedAmount(`₹${data.rates[TO_CURRENCY]}`);
     } catch (error) {
-      console.error("Error Fetching", error);
+      console.error("Error converting", error);
     } finally {
       setConverting(false);
     }
   };
 
   const swapCurrencies = () => {
-    setFromCurrency(toCurrency);
-    setToCurrency(fromCurrency);
+    if (fromCurrency !== "INR") {
+      setFromCurrency("INR");
+    } else {
+      setFromCurrency("USD"); 
+    }
   };
 
   return (
@@ -92,15 +95,16 @@ const CurrencyConverter = () => {
           setCurrency={setFromCurrency}
         />
         <div className="swap-button-wrapper">
-          <button onClick={swapCurrencies} className="swap-button">
+          <button onClick={swapCurrencies} className="swap-button" aria-label="Swap Currencies">
             <HiArrowsExpand />
           </button>
         </div>
         <CurrencyDropdown
-          currencies={currencies}
-          currency={toCurrency}
-          setCurrency={setToCurrency}
+          currencies={["INR"]}
+          currency="INR"
+          setCurrency={() => {}}
           title="To:"
+          disabled
         />
       </div>
 
