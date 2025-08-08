@@ -1,36 +1,26 @@
-# Infinite Scroll Test Cases
+# Infinite Scroll List - Test Cases
 
-## ✅ Basic Tests
+## 1. Initial Load
+- Renders first 10 items.
+- Shows loading indicator while fetching.
+- Hides loading indicator after load.
 
-### TC1: Renders initial items
-- Action: Component mounts
-- Expectation: First 10 items are visible
+## 2. Auto Load More on Scroll
+- When loader enters viewport, next 10 items load automatically.
+- Items append to existing list, no duplicates.
+- Loading indicator shows during fetch.
 
-### TC2: Loads next batch on scroll
-- Action: Scroll near bottom
-- Expectation: Next 10 items load after a delay
+## 3. End of List Behavior
+- After all 50 items loaded, no further fetches triggered.
+- Shows “You’ve reached the end” message.
+- Loader remains but does not trigger more fetches.
 
-### TC3: Shows loader during fetch
-- Action: Scroll while data is loading
-- Expectation: Spinner or loading text shown
+## 4. No Duplicate Fetches
+- Fast scrolling triggers only one fetch at a time.
+- Pages are not refetched if already loaded.
 
-### TC4: Stops loading after last item
-- Action: Scroll after all items are fetched
-- Expectation: “You’ve reached the end” is displayed
+## 5. Slow Network Handling
+- Loader visible clearly during network delays.
 
----
-
-## 🧪 Edge Cases
-
-### TC5: Scroll very fast to bottom
-- Action: Scroll to bottom quickly
-- Expectation: All intermediate batches load correctly
-
-### TC6: Component unmounts mid-load
-- Action: Navigate away while loading
-- Expectation: No memory leaks or state updates on unmounted component
-
-### TC7: Resize window
-- Action: Shrink viewport and scroll
-- Expectation: Scroll triggers still work
-
+## 6. (Optional) Network Failure
+- On fetch failure, optionally show error or silently handle without crash.

@@ -4,7 +4,6 @@ import "./App.css";
 const TOTAL_ITEMS = 50;
 const PAGE_SIZE = 10;
 
-// 👇 JavaScript version: no `: Promise<string[]>`
 const mockFetch = (page) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -25,7 +24,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
-  const didLoadPageRef = useRef(new Set()); // ✅ Set for JS too
+  const didLoadPageRef = useRef(new Set());
 
   useEffect(() => {
     const loadItems = async () => {
@@ -61,16 +60,16 @@ export default function App() {
   }, [hasMore, isLoading]);
 
   return (
-    <div className="container">
-      <ul className="list">
+    <div className="scroll-container">
+      <ul className="list" data-testid="items-list">
         {items.map((item) => (
-          <li key={item} className="item">
+          <li key={item} className="item" data-testid="list-item">
             {item}
           </li>
         ))}
       </ul>
-      {isLoading && <p className="loader">Loading...</p>}
-      {!hasMore && <p className="end">You’ve reached the end</p>}
+      {isLoading && <p className="loader" data-testid="loading-text">Loading...</p>}
+      {!hasMore && <p className="end" data-testid="end-message">You’ve reached the end</p>}
       <div ref={loaderRef} data-testid="loader-ref"></div>
     </div>
   );

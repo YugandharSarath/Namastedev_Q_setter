@@ -1,110 +1,80 @@
 
----
-
-### 🧠 **Hints**
+### Hints
 
 ---
 
-#### 1. **Simulate loading with a delay using `jest.runAllTimers()`**
-
-For test environments, mock the fetch delay using `setTimeout`, and advance timers manually.
+### 1. Use State to Track Items, Page, Loading, and Completion
 
 ```js
-jest.useFakeTimers();
-
-await act(async () => {
-  fireEvent.scroll(window, { target: { scrollY: 1000 } }); // simulate scroll
-  jest.runAllTimers(); // fast-forward mockFetch setTimeout
-});
-```
-
----
-
-#### 2. **Mock `IntersectionObserver` in Tests**
-
-React apps using infinite scroll need `IntersectionObserver` to detect when to fetch more items. In tests, you must mock this API.
-
-```js
-beforeEach(() => {
-  const observe = jest.fn();
-  const unobserve = jest.fn();
-  window.IntersectionObserver = jest.fn(() => ({
-    observe,
-    unobserve,
-    disconnect: jest.fn(),
-  }));
-});
-```
-
----
-
-#### 3. **Track current page and fetched items**
-
-Use `useState` and `useRef` to manage state cleanly and prevent duplicate fetches.
-
-```js
-const [page, setPage] = useState(1);
 const [items, setItems] = useState([]);
-const didLoadPageRef = useRef(new Set());
+const [page, setPage] = useState(1);
+const [isLoading, setIsLoading] = useState(false);
+const [hasMore, setHasMore] = useState(true);
+```
+
+---
+
+### 2. Fetch Items with Pagination and Append to List
+
+```js
+const loadItems = async (page) => {
+  setIsLoading(true);
+  const newItems = await fetchItems(page);
+  setItems(prev => [...prev, ...newItems]);
+  setIsLoading(false);
+  if (newItems.length < PAGE_SIZE) setHasMore(false);
+};
+```
+
+---
+
+### 3. Use IntersectionObserver to Detect Loader Visibility
+
+```js
+useEffect(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && hasMore && !isLoading) {
+      setPage(p => p + 1);
+    }
+  }, { threshold: 1 });
+
+  const loader = loaderRef.current;
+  if (loader) observer.observe(loader);
+  return () => loader && observer.unobserve(loader);
+}, [hasMore, isLoading]);
+```
+
+---
+
+### 4. Avoid Duplicate Fetches for the Same Page
+
+Use a `Set` to track loaded pages:
+
+```js
+const loadedPages = useRef(new Set());
 
 useEffect(() => {
-  if (didLoadPageRef.current.has(page)) return;
-  didLoadPageRef.current.add(page);
-
-  // Fetch and append
+  if (loadedPages.current.has(page)) return;
+  loadedPages.current.add(page);
+  loadItems(page);
 }, [page]);
 ```
 
 ---
 
-#### 4. **Loader while fetching**
-
-Conditionally show a loader message while `isLoading` is `true`.
+### 5. Add `data-testid` Attributes for Testing
 
 ```jsx
-{isLoading && <p className="loader" data-testid="loader">Loading...</p>}
-```
-
-✅ In test:
-
-```js
-expect(screen.getByTestId("loader")).toBeInTheDocument();
-```
-
----
-
-#### 5. **Show message when all items are loaded**
-
-Use a flag like `hasMore` to detect end of list and show a message.
-
-```jsx
-{!hasMore && <p className="end" data-testid="end-message">You’ve reached the end</p>}
-```
-
-✅ In test:
-
-```js
-expect(screen.getByTestId("end-message")).toBeInTheDocument();
-```
-
----
-
-#### 6. **Observe the loader element**
-
-The last `<div ref={loaderRef}>` acts as a sentinel. When it intersects, load next page.
-
-```jsx
+<ul>
+  {items.map(item => (
+    <li key={item} data-testid="list-item">{item}</li>
+  ))}
+</ul>
+{isLoading && <p data-testid="loading-text">Loading...</p>}
+{!hasMore && <p data-testid="end-message">You’ve reached the end</p>}
 <div ref={loaderRef} data-testid="loader-ref" />
 ```
 
-✅ In test (simulate it intersecting):
-
-```js
-act(() => {
-  const observerCallback = window.IntersectionObserver.mock.calls[0][0];
-  observerCallback([{ isIntersecting: true }]);
-});
-```
-
 ---
 
+If you want, I can help you turn these snippets into a full working example or help you write tests based on these!
