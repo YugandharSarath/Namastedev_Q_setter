@@ -1,87 +1,114 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import PaginatedBookmarkList from './PaginatedBookmarkList';
-import '@testing-library/jest-dom';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import PaginatedBookmarkList from "./PaginatedBookmarkList";
+import "@testing-library/jest-dom";
 
-describe('PaginatedBookmarkList', () => {
+describe("PaginatedBookmarkList", () => {
   beforeEach(() => {
     render(<PaginatedBookmarkList />);
   });
 
-  test('displays only 5 articles per page', () => {
-    const articles = screen.getAllByText(/Article \d+/);
+  test("displays only 5 articles per page", () => {
+    const articles = screen.getAllByTestId(/article-card-/);
     expect(articles.length).toBeLessThanOrEqual(5);
   });
 
-  test('pagination updates displayed articles', () => {
-    const nextButton = screen.getByText('Next');
+  test("pagination updates displayed articles", () => {
+    const nextButton = screen.getByTestId("next-button");
     fireEvent.click(nextButton);
-    const articles = screen.getAllByText(/Article \d+/);
+    const articles = screen.getAllByTestId(/article-card-/);
     expect(articles.length).toBeLessThanOrEqual(5);
-    expect(screen.queryByText('Article 1')).toBeNull();
+    // Article 1 should not be visible on page 2
+    expect(screen.queryByTestId("article-card-1")).toBeNull();
   });
 
-  test('bookmark icon toggles bookmark state', () => {
-    const bookmarkIcons = screen.getAllByText('★');
-    const firstIcon = bookmarkIcons[0];
-    expect(firstIcon.className).not.toContain('active');
+  test("bookmark icon toggles bookmark state", () => {
+    const firstIcon = screen.getByTestId("bookmark-icon-1");
+    expect(firstIcon.className).not.toContain("active");
     fireEvent.click(firstIcon);
-    expect(firstIcon.className).toContain('active');
+    expect(firstIcon.className).toContain("active");
     fireEvent.click(firstIcon);
-    expect(firstIcon.className).not.toContain('active');
+    expect(firstIcon.className).not.toContain("active");
   });
 
-  test('show only bookmarked filter works', () => {
-    const bookmarkIcons = screen.getAllByText('★');
-    fireEvent.click(bookmarkIcons[0]);
-    const filterCheckbox = screen.getByLabelText('Show only bookmarked');
+  test("show only bookmarked filter works", () => {
+    const firstIcon = screen.getByTestId("bookmark-icon-1");
+    fireEvent.click(firstIcon);
+
+    const filterCheckbox = screen.getByTestId("bookmark-filter-checkbox");
     fireEvent.click(filterCheckbox);
-    const articles = screen.getAllByText(/Article \d+/);
+
+    const articles = screen.getAllByTestId(/article-card-/);
     expect(articles.length).toBe(1);
+    expect(screen.getByTestId("article-card-1")).toBeInTheDocument();
   });
 
-  test('pagination works in bookmarked-only mode', () => {
-    let toBookmark = 6;
-    while (toBookmark > 0) {
-      const bookmarkIcons = screen.queryAllByText('★');
-      if (bookmarkIcons.length === 0) break;
-      fireEvent.click(bookmarkIcons[0]);
-      toBookmark--;
-    }
-    const filterCheckbox = screen.getByLabelText('Show only bookmarked');
-    fireEvent.click(filterCheckbox);
-    const articles = screen.queryAllByText(/Article \d+/);
-    if (articles.length > 0) {
-      expect(articles.length).toBeLessThanOrEqual(5);
-      const nextButton = screen.getByText('Next');
-      fireEvent.click(nextButton);
-      const nextArticles = screen.queryAllByText(/Article \d+/);
-      expect(nextArticles.length).toBeLessThanOrEqual(5);
-    } else {
-      expect(screen.getByText('No articles to display.')).toBeInTheDocument();
-    }
-  });
+  test("pagination works in bookmarked-only mode", () => {
+  // Bookmark articles 1 to 5 on page 1
+  for (let id = 1; id <= 5; id++) {
+    const icon = screen.getByTestId(`bookmark-icon-${id}`);
+    fireEvent.click(icon);
+  }
 
-  test('bookmarks remain after switching pages and filters', () => {
-    const bookmarkIcons = screen.getAllByText('★');
-    fireEvent.click(bookmarkIcons[0]);
-    const nextButton = screen.getByText('Next');
+  // Go to page 2 to bookmark article 6
+  const nextButton = screen.getByTestId("next-button");
+  fireEvent.click(nextButton);
+
+  // Now bookmark article 6 on page 2
+  const icon6 = screen.getByTestId("bookmark-icon-6");
+  fireEvent.click(icon6);
+
+  // Go back to page 1 and enable filter
+  const prevButton = screen.getByTestId("prev-button");
+  fireEvent.click(prevButton);
+
+  const filterCheckbox = screen.getByTestId("bookmark-filter-checkbox");
+  fireEvent.click(filterCheckbox);
+
+  let articles = screen.queryAllByTestId(/article-card-/);
+  if (articles.length > 0) {
+    expect(articles.length).toBeLessThanOrEqual(5);
+
+    const nextButtonFiltered = screen.getByTestId("next-button");
+    fireEvent.click(nextButtonFiltered);
+
+    const nextArticles = screen.queryAllByTestId(/article-card-/);
+    expect(nextArticles.length).toBeLessThanOrEqual(5);
+  } else {
+    expect(screen.getByTestId("no-articles-message")).toBeInTheDocument();
+  }
+});
+
+
+  test("bookmarks remain after switching pages and filters", () => {
+    const firstIcon = screen.getByTestId("bookmark-icon-1");
+    fireEvent.click(firstIcon);
+
+    const nextButton = screen.getByTestId("next-button");
     fireEvent.click(nextButton);
-    const prevButton = screen.getByText('Prev');
+
+    const prevButton = screen.getByTestId("prev-button");
     fireEvent.click(prevButton);
-    expect(bookmarkIcons[0].className).toContain('active');
-    const filterCheckbox = screen.getByLabelText('Show only bookmarked');
+
+    expect(screen.getByTestId("bookmark-icon-1").className).toContain("active");
+
+    const filterCheckbox = screen.getByTestId("bookmark-filter-checkbox");
     fireEvent.click(filterCheckbox);
     fireEvent.click(filterCheckbox);
-    expect(bookmarkIcons[0].className).toContain('active');
+
+    expect(screen.getByTestId("bookmark-icon-1").className).toContain("active");
   });
 
-  test('list becomes empty if all bookmarks are removed in bookmarked-only view', () => {
-    const bookmarkIcons = screen.getAllByText('★');
-    fireEvent.click(bookmarkIcons[0]);
-    const filterCheckbox = screen.getByLabelText('Show only bookmarked');
+  test("list becomes empty if all bookmarks are removed in bookmarked-only view", () => {
+    const firstIcon = screen.getByTestId("bookmark-icon-1");
+    fireEvent.click(firstIcon);
+
+    const filterCheckbox = screen.getByTestId("bookmark-filter-checkbox");
     fireEvent.click(filterCheckbox);
-    fireEvent.click(screen.getAllByText('★')[0]);
-    expect(screen.getByText('No articles to display.')).toBeInTheDocument();
+
+    const bookmarkedIcon = screen.getByTestId("bookmark-icon-1");
+    fireEvent.click(bookmarkedIcon);
+
+    expect(screen.getByTestId("no-articles-message")).toBeInTheDocument();
   });
 });

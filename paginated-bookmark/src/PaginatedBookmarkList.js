@@ -42,32 +42,42 @@ export default function PaginatedBookmarkList() {
   };
 
   return (
-    <div className="paginated-container">
-      <div className="header">
+    <div className="paginated-container" data-testid="paginated-container">
+      <div className="header" data-testid="header">
         <h2>Articles</h2>
-        <label>
+        <label htmlFor="bookmark-filter">
           <input
+            id="bookmark-filter"
             type="checkbox"
             checked={showOnlyBookmarked}
             onChange={() => {
               setShowOnlyBookmarked(!showOnlyBookmarked);
               setCurrentPage(1);
             }}
+            data-testid="bookmark-filter-checkbox"
           />
           Show only bookmarked
         </label>
       </div>
 
       {currentArticles.length === 0 ? (
-        <p>No articles to display.</p>
+        <p data-testid="no-articles-message">No articles to display.</p>
       ) : (
         currentArticles.map((article) => (
-          <div key={article.id} className="article-card">
+          <div
+            key={article.id}
+            className="article-card"
+            data-testid={`article-card-${article.id}`}
+          >
             <h3>
               {article.title}
               <span
                 className={`bookmark ${article.bookmarked ? "active" : ""}`}
                 onClick={() => toggleBookmark(article.id)}
+                data-testid={`bookmark-icon-${article.id}`}
+                role="button"
+                aria-label={`Bookmark toggle for ${article.title}`}
+                style={{ cursor: "pointer", marginLeft: "8px" }}
               >
                 ★
               </span>
@@ -77,19 +87,21 @@ export default function PaginatedBookmarkList() {
         ))
       )}
 
-      <div className="pagination">
+      <div className="pagination" data-testid="pagination-controls">
         <button
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
+          data-testid="prev-button"
         >
           Prev
         </button>
-        <span>
+        <span data-testid="page-info">
           Page {currentPage} of {totalPages || 1}
         </span>
         <button
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
+          data-testid="next-button"
         >
           Next
         </button>

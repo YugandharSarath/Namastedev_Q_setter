@@ -1,6 +1,9 @@
-## 💡 **Hints with Code Snippets**
 
-### 1. **Pagination Logic**
+### `hints.md`
+
+#### 1\. Pagination Logic
+
+To paginate correctly, you should use `slice()` on the `filteredArticles` array, not the full list of all articles. The `startIndex` for the slice is calculated as `(currentPage - 1) * ARTICLES_PER_PAGE`.
 
 ```js
 const ARTICLES_PER_PAGE = 5;
@@ -8,11 +11,9 @@ const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
 const currentArticles = filteredArticles.slice(startIndex, startIndex + ARTICLES_PER_PAGE);
 ```
 
-> 💡 Use `slice()` on the **filteredArticles** (not the full list).
+#### 2\. Filtering Before Pagination
 
----
-
-### 2. **Filtering Before Pagination**
+The filtering logic must be applied before pagination. You should create a `filteredArticles` variable that either holds all articles or only the bookmarked ones, and then paginate this filtered list.
 
 ```js
 const filteredArticles = showOnlyBookmarked
@@ -20,11 +21,9 @@ const filteredArticles = showOnlyBookmarked
   : articles;
 ```
 
-> 💡 Always **filter first**, then paginate.
+#### 3\. Bookmark Toggle Logic
 
----
-
-### 3. **Bookmark Toggle Logic**
+To toggle a bookmark, use the `map()` method to create a new array. This ensures that the state is updated immutably. You find the article by its `id` and then spread its properties, flipping the `bookmarked` boolean.
 
 ```js
 const toggleBookmark = (id) => {
@@ -38,11 +37,9 @@ const toggleBookmark = (id) => {
 };
 ```
 
-> 💡 Use `map()` to **immutably** update the specific article.
+#### 4\. Filter Checkbox Resets Page
 
----
-
-### 4. **Filter Checkbox Reset Page**
+The `onChange` handler for the "Show only bookmarked" checkbox should not only toggle the filter state but also reset the `currentPage` to 1.
 
 ```js
 <input
@@ -55,9 +52,9 @@ const toggleBookmark = (id) => {
 />
 ```
 
----
+#### 5\. Bookmark Icon Toggle (Visual)
 
-### 5. **Bookmark Icon Toggle (Visual)**
+You can use a conditional class name to visually indicate the bookmark state. For example, add an "active" class if `article.bookmarked` is true, which can then be styled (e.g., with a gold color).
 
 ```js
 <span
@@ -68,11 +65,9 @@ const toggleBookmark = (id) => {
 </span>
 ```
 
-> 💡 Use conditional class styling for visual feedback (e.g., gold color).
+#### 6\. Pagination Buttons Guard
 
----
-
-### 6. **Pagination Buttons Guard**
+The "Prev" and "Next" buttons should be disabled based on the current page. The "Prev" button is disabled on page 1, and the "Next" button is disabled on the last page.
 
 ```js
 <button
@@ -90,9 +85,9 @@ const toggleBookmark = (id) => {
 </button>
 ```
 
----
+#### 7\. Empty State UI
 
-### 7. **Empty State UI**
+To handle cases where there are no articles to display (especially with the filter on), use a conditional rendering block. If `currentArticles.length` is 0, show a message; otherwise, render the list of articles.
 
 ```js
 {currentArticles.length === 0 ? (
@@ -101,9 +96,3 @@ const toggleBookmark = (id) => {
   currentArticles.map(/* render articles */)
 )}
 ```
-
-> 💡 This message is especially important when the **filter is active and no results** are shown.
-
----
-
-
