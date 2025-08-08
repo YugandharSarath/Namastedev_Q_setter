@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './MatchColorGame.css';
 
 const initialColors = [
-  'red', 'blue', 'green', 'yellow',
-  'purple', 'orange', 'pink', 'cyan'
+  'red', 'blue', 'green', 'yellow', 'purple', 
+  'orange', 'pink', 'cyan', 'brown', 'lime'
 ];
 
 const MatchColorGame = () => {
@@ -18,11 +17,11 @@ const MatchColorGame = () => {
   }, []);
 
   const shuffle = (array) => {
-
+    // Create pairs of colors (20 cards total)
     return [...array, ...array]
-      .map((value) => ({
+      .map((value, index) => ({
         value, 
-        id: Math.random().toString(36).substr(2, 9), 
+        id: index,
         revealed: false, 
         matched: false 
       }))
@@ -30,7 +29,7 @@ const MatchColorGame = () => {
   };
 
   const handleClick = (card) => {
-
+    // Prevent clicks on revealed/matched cards or when two cards are already selected
     if (card.revealed || card.matched || secondCard) return;
 
     setCards((prevCards) =>
@@ -42,12 +41,11 @@ const MatchColorGame = () => {
     if (!firstCard) {
       setFirstCard(card);
     } else {
-
       setSecondCard(card);
       setMoves((prev) => prev + 1); 
 
       if (firstCard.value === card.value) {
-
+        // Match found
         setTimeout(() => {
           setCards((prev) =>
             prev.map((c) =>
@@ -59,7 +57,7 @@ const MatchColorGame = () => {
           setSecondCard(null);
         }, 200); 
       } else {
-
+        // No match
         setTimeout(() => {
           setCards((prev) =>
             prev.map((c) =>
@@ -77,7 +75,6 @@ const MatchColorGame = () => {
   };
 
   useEffect(() => {
-
     if (cards.length > 0 && cards.every((card) => card.matched)) {
       setWon(true);
     }
@@ -92,26 +89,26 @@ const MatchColorGame = () => {
   };
 
   return (
-    <div className="game-container">
-      <h1>Match the Colors 🎨</h1>
-      <div className="grid">
-        {cards.map((card) => (
+    <div className="game-container" data-testid="game-container">
+      <h1 data-testid="game-title">Match the Colors 🎨</h1>
+      <div className="grid" data-testid="game-board">
+        {cards.map((card, index) => (
           <div
             key={card.id}
+            data-testid={`card-${index}`}
             role="button"
             aria-label={`card-${card.id}`}
             className={`card ${card.revealed || card.matched ? 'revealed' : ''}`}
             onClick={() => handleClick(card)}
             style={{
-
               backgroundColor: card.revealed || card.matched ? card.value : '#444',
             }}
           ></div>
         ))}
       </div>
-      <p>Moves: {moves}</p>
+      <p data-testid="turns-display">Moves: {moves}</p>
       {won && <p className="won">🎉 You won!</p>}
-      <button onClick={resetGame}>Reset Game</button>
+      <button onClick={resetGame} data-testid="reset-button">Reset Game</button>
     </div>
   );
 };
