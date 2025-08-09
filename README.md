@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🔗 Project Showcase
 
 A curated list of mini-projects built using React and modern JavaScript features.
@@ -58,6 +58,3 @@ Each project demonstrates a specific concept, UI behavior, or algorithm visualiz
 > 📌 All projects are hosted on GitHub and editable on CodeSandbox. Contributions, suggestions, and feedback are welcome!
 
 Happy coding! 🚀
-=======
-# color-code-game
->>>>>>> origin/main
