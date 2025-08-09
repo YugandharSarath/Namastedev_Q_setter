@@ -1,4 +1,3 @@
-
 ## 🐍 **Snakes and Ladders Game Visualizer**
 
 ### 🧩 Requirements
@@ -35,7 +34,7 @@
 
 5. **Game Win Logic**
 
-   * Display **“🎉 You Win!”** when the player reaches **exactly** 100.
+   * Display **"🎉 You Win!"** when the player reaches **exactly** 100.
 
 ---
 
@@ -46,5 +45,18 @@
 * 💯 Victory is declared **only** when position === 100.
 * ✅ Player can **still fall to snake even near 100**.
 
+---
 
+### 🧪 **Testing with data-testid Attributes**
+
+The following `data-testid` attributes have been added to enable comprehensive testing:
+
+#### **Main Game Elements**
+- `game-container` - Main app container
+- `game-title` - Game title heading
+- `game-board` - Game board container
+- `game-controls` - Dice and controls section
+- `current-position` - Current position display
+- `game-message` - Snake/ladder messages
+- `win-message` - Victory message
 

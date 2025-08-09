@@ -47,11 +47,11 @@ export default function SnakeAndLadders() {
     if (ladder) className += " ladder";
 
     return (
-      <div key={num} className={className}>
-        <div className="number">{num}</div>
-        {snake && moveTo && <div className="marker">🐍 → {moveTo}</div>}
-        {ladder && moveTo && <div className="marker">🪜 → {moveTo}</div>}
-        {position === num && <div className="player">🎲</div>}
+      <div key={num} className={className} data-testid={`cell-${num}`}>
+        <div className="number" data-testid={`cell-number-${num}`}>{num}</div>
+        {snake && moveTo && <div className="marker" data-testid={`snake-marker-${num}`}>🐍 → {moveTo}</div>}
+        {ladder && moveTo && <div className="marker" data-testid={`ladder-marker-${num}`}>🪜 → {moveTo}</div>}
+        {position === num && <div className="player" data-testid="player-token">🎲</div>}
       </div>
     );
   };
@@ -65,7 +65,7 @@ export default function SnakeAndLadders() {
         rowCells.push(renderCell(num));
       }
       rows.push(
-        <div key={row} style={{ display: "flex" }}>
+        <div key={row} style={{ display: "flex" }} data-testid={`board-row-${row}`}>
           {rowCells}
         </div>
       );
@@ -74,26 +74,27 @@ export default function SnakeAndLadders() {
   };
 
   return (
-    <div className="app" style={{ padding: "1rem", textAlign: "center" }}>
-      <h1>🎲 Snakes and Ladders</h1>
-      <div>{renderBoard()}</div>
+    <div className="app" style={{ padding: "1rem", textAlign: "center" }} data-testid="game-container">
+      <h1 data-testid="game-title">🎲 Snakes and Ladders</h1>
+      <div data-testid="game-board">{renderBoard()}</div>
 
-      <div style={{ marginTop: "1rem" }}>
-        <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
+      <div style={{ marginTop: "1rem" }} data-testid="game-controls">
+        <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }} data-testid="dice-display">
           Dice Rolled: {diceValue ? `🎲 ${diceValue}` : "Not rolled yet"}
         </div>
         <button
           onClick={rollDice}
           disabled={position === 100}
           style={{ padding: "10px 20px", fontSize: "1rem" }}
+          data-testid="roll-dice-button"
         >
           Roll Dice
         </button>
       </div>
 
-      <p style={{ marginTop: "1rem" }}>Current Position: {position}</p>
-      {message && <p style={{ color: "blue" }}>{message}</p>}
-      {position === 100 && <h2>🏆 You Win!</h2>}
+      <p style={{ marginTop: "1rem" }} data-testid="current-position">Current Position: {position}</p>
+      {message && <p style={{ color: "blue" }} data-testid="game-message">{message}</p>}
+      {position === 100 && <h2 data-testid="win-message">🏆 You Win!</h2>}
     </div>
   );
 }
