@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import sudoku from "sudoku"; // npm install sudoku
+import sudoku from "sudoku"; 
+import './sudoku.css'
 
 export default function SudokuGame() {
   const [grid, setGrid] = useState([]);
@@ -112,73 +113,11 @@ export default function SudokuGame() {
   };
 
   return (
-    <div className="sudoku-container">
-      <style>{`
-        .sudoku-container {
-          text-align: center;
-          font-family: Arial, sans-serif;
-          padding: 2rem;
-        }
-        .sudoku-board {
-          display: inline-block;
-          margin-bottom: 1rem;
-        }
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(9, 40px);
-          grid-template-rows: repeat(9, 40px);
-          gap: 0;
-        }
-        .cell {
-          width: 40px;
-          height: 40px;
-          text-align: center;
-          font-size: 18px;
-          border: 1px solid #aaa;
-        }
-        .cell:focus {
-          outline: 2px solid #007bff;
-        }
-        .cell.fixed {
-          background-color: #e0e0e0;
-          font-weight: bold;
-        }
-        .top-border {
-          border-top: 2px solid #000;
-        }
-        .left-border {
-          border-left: 2px solid #000;
-        }
-        .bottom-border {
-          border-bottom: 2px solid #000;
-        }
-        .right-border {
-          border-right: 2px solid #000;
-        }
-        .controls {
-          margin: 1rem 0;
-        }
-        .controls button {
-          margin: 0 0.5rem;
-          padding: 0.5rem 1rem;
-          font-size: 16px;
-          cursor: pointer;
-        }
-        .status {
-          font-weight: bold;
-          margin-top: 1rem;
-        }
-        .status.correct {
-          color: green;
-        }
-        .status.invalid {
-          color: red;
-        }
-      `}</style>
+    <div className="sudoku-container" data-testid="sudoku-container">
 
       <h1>🧩 Sudoku Game</h1>
-      <div className="sudoku-board">
-        <div className="grid">
+      <div className="sudoku-board" data-testid="sudoku-board">
+        <div className="grid" data-testid="sudoku-grid">
           {grid.map((row, rIdx) =>
             row.map((cell, cIdx) => {
               const isFixed = initialGrid[rIdx][cIdx] !== "";
@@ -192,6 +131,7 @@ export default function SudokuGame() {
               return (
                 <input
                   key={`${rIdx}-${cIdx}`}
+                  data-testid={`cell-${rIdx}-${cIdx}`}
                   className={className}
                   value={cell}
                   onChange={(e) => handleChange(rIdx, cIdx, e.target.value)}
@@ -207,7 +147,7 @@ export default function SudokuGame() {
         </div>
       </div>
 
-      <div className="controls">
+      <div className="controls" data-testid="game-controls">
         <button onClick={checkPuzzle}>Check</button>
         <button onClick={handleSolve}>Solve</button>
         <button onClick={createNewPuzzle}>New Puzzle</button>
@@ -215,7 +155,7 @@ export default function SudokuGame() {
 
       <p className={`status ${
         status.includes("Correct") ? "correct" : status.includes("Invalid") ? "invalid" : ""
-      }`}>
+      }`} data-testid="status-message">
         {status}
       </p>
     </div>
