@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 
 const mockWords = ["CRANE", "PLANT", "SHEEP", "MONEY", "ZEBRA"];
 
-// Mock fetch before each test
 beforeEach(() => {
   global.fetch = jest.fn(() =>
     Promise.resolve({
@@ -54,7 +53,6 @@ test("shows error if word is not in word list", async () => {
 test("new game button resets the game", async () => {
   render(<App />);
 
-  // Wait for the board and button to be fully rendered
   await waitFor(() => {
     expect(screen.getByText("React Wordle")).toBeInTheDocument();
     expect(screen.getByTestId("new-game-btn")).toBeInTheDocument();
@@ -64,7 +62,6 @@ test("new game button resets the game", async () => {
 
   fireEvent.click(newGameButton);
 
-  // Wait again for the reset state — checking if board resets to turn 0
   await waitFor(() => {
     expect(screen.getByText("React Wordle")).toBeInTheDocument();
     expect(screen.getByTestId("new-game-btn")).toBeInTheDocument();
