@@ -18,7 +18,6 @@ describe("PaginatedBookmarkList", () => {
     fireEvent.click(nextButton);
     const articles = screen.getAllByTestId(/article-card-/);
     expect(articles.length).toBeLessThanOrEqual(5);
-    // Article 1 should not be visible on page 2
     expect(screen.queryByTestId("article-card-1")).toBeNull();
   });
 
@@ -44,21 +43,17 @@ describe("PaginatedBookmarkList", () => {
   });
 
   test("pagination works in bookmarked-only mode", () => {
-  // Bookmark articles 1 to 5 on page 1
   for (let id = 1; id <= 5; id++) {
     const icon = screen.getByTestId(`bookmark-icon-${id}`);
     fireEvent.click(icon);
   }
 
-  // Go to page 2 to bookmark article 6
   const nextButton = screen.getByTestId("next-button");
   fireEvent.click(nextButton);
 
-  // Now bookmark article 6 on page 2
   const icon6 = screen.getByTestId("bookmark-icon-6");
   fireEvent.click(icon6);
 
-  // Go back to page 1 and enable filter
   const prevButton = screen.getByTestId("prev-button");
   fireEvent.click(prevButton);
 
