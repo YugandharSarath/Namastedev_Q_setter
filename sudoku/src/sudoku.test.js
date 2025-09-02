@@ -8,7 +8,6 @@ describe("SudokuGame Component", () => {
     render(<SudokuGame />);
   });
 
-  // Test basic structure and test IDs
   test("renders sudoku container with correct test ID", () => {
     expect(screen.getByTestId("sudoku-container")).toBeInTheDocument();
   });
@@ -25,9 +24,7 @@ describe("SudokuGame Component", () => {
     expect(screen.getByTestId("game-controls")).toBeInTheDocument();
   });
 
-  // Test all 81 cells
   test("renders exactly 81 cells with correct test IDs", () => {
-    // Check that all 81 cells exist (9x9 grid)
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         const cell = screen.getByTestId(`cell-${row}-${col}`);
@@ -38,7 +35,6 @@ describe("SudokuGame Component", () => {
   });
 
   test("cells have proper accessibility labels", () => {
-    // Original code doesn't have aria-label, so we'll test that cells exist and are accessible
     const cell = screen.getByTestId("cell-0-0");
     expect(cell).toBeInTheDocument();
     expect(cell.tagName).toBe("INPUT");
@@ -48,17 +44,14 @@ describe("SudokuGame Component", () => {
     expect(lastCell.tagName).toBe("INPUT");
   });
 
-  // Test cell functionality
   test("allows input only in editable cells", () => {
-    // Find an editable cell (one that's empty initially)
-    const editableCell = screen.getByTestId("cell-0-2"); // Should be empty in default puzzle
+    const editableCell = screen.getByTestId("cell-0-2"); 
     
     fireEvent.change(editableCell, { target: { value: "5" } });
     expect(editableCell.value).toBe("5");
   });
 
   test("prevents input in fixed cells", () => {
-    // Wait for the puzzle to load, then find a fixed cell
     const cells = screen.getAllByTestId(/cell-\d-\d/);
     const fixedCell = cells.find(cell => cell.disabled && cell.value !== "");
     
@@ -66,7 +59,6 @@ describe("SudokuGame Component", () => {
       expect(fixedCell).toBeDisabled();
       expect(fixedCell.value).not.toBe("");
     } else {
-      // If no fixed cells found, at least verify the cell structure is correct
       expect(cells.length).toBe(81);
     }
   });
@@ -74,34 +66,32 @@ describe("SudokuGame Component", () => {
   test("only accepts digits 1-9", () => {
     const editableCell = screen.getByTestId("cell-0-2");
     
-    // Valid input
     fireEvent.change(editableCell, { target: { value: "7" } });
     expect(editableCell.value).toBe("7");
     
-    // Invalid inputs should be ignored (component logic prevents them)
     fireEvent.change(editableCell, { target: { value: "0" } });
-    expect(editableCell.value).toBe("7"); // Should remain unchanged
+    expect(editableCell.value).toBe("7"); 
     
     fireEvent.change(editableCell, { target: { value: "a" } });
-    expect(editableCell.value).toBe("7"); // Should remain unchanged
+    expect(editableCell.value).toBe("7"); 
     
     fireEvent.change(editableCell, { target: { value: "!" } });
-    expect(editableCell.value).toBe("7"); // Should remain unchanged
+    expect(editableCell.value).toBe("7"); 
   });
 
   test("allows clearing cells with empty string", () => {
     const editableCell = screen.getByTestId("cell-0-2");
     
-    // Set a value first
+ 
     fireEvent.change(editableCell, { target: { value: "3" } });
     expect(editableCell.value).toBe("3");
     
-    // Clear it
+
     fireEvent.change(editableCell, { target: { value: "" } });
     expect(editableCell.value).toBe("");
   });
 
-  // Test grid structure
+ 
   test("cells have proper CSS classes for fixed vs editable", () => {
     const cells = screen.getAllByTestId(/cell-\d-\d/);
     const fixedCell = cells.find(cell => cell.disabled);
