@@ -8,7 +8,6 @@ export default function CommentApp() {
   const [comments, setComments] = useState(mockComments);
   const [newComment, setNewComment] = useState("");
 
-  // Function to add a reply to any nested comment
   const addReply = (id, text) => {
     const addNestedReply = (commentList) => {
       return commentList.map((comment) => {
@@ -31,7 +30,6 @@ export default function CommentApp() {
     setComments(addNestedReply(comments));
   };
 
-  // Function to add a top-level comment
   const addComment = () => {
     if (newComment.trim()) {
       setComments([
@@ -42,7 +40,6 @@ export default function CommentApp() {
     }
   };
 
-  // Recursive comment renderer
   const Comment = ({ comment }) => {
     const [showReplyInput, setShowReplyInput] = useState(false);
     const [replyText, setReplyText] = useState("");

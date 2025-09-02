@@ -32,7 +32,7 @@ describe('CommentApp', () => {
 
   test('can add a reply to a comment', () => {
     render(<App />);
-    const firstCommentId = 1; // assuming first mock comment has id=1
+    const firstCommentId = 1; 
     addReplyToComment(firstCommentId, 'This is a reply');
     expect(screen.getByText('This is a reply')).toBeInTheDocument();
   });
@@ -42,7 +42,6 @@ describe('CommentApp', () => {
     const firstCommentId = 1;
     addReplyToComment(firstCommentId, 'First reply');
 
-    // The first reply will have a new auto-generated id = 2
     addReplyToComment(2, 'Nested reply');
     expect(screen.getByText('Nested reply')).toBeInTheDocument();
   });
