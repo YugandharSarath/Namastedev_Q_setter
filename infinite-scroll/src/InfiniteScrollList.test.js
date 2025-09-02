@@ -5,7 +5,6 @@ import "@testing-library/jest-dom";
 
 let observerInstances = [];
 
-// Helper to simulate intersection
 function triggerIntersection(element) {
   observerInstances.forEach((instance) => {
     act(() => {
@@ -18,10 +17,8 @@ describe("App Infinite Scroll", () => {
   beforeEach(() => {
     jest.useFakeTimers();
 
-    // Reset instance tracking
     observerInstances = [];
 
-    // Mock IntersectionObserver
     window.IntersectionObserver = jest.fn(function (callback) {
       this.observe = jest.fn();
       this.unobserve = jest.fn();
@@ -42,7 +39,6 @@ describe("App Infinite Scroll", () => {
       jest.runAllTimers();
     });
 
-    // Use findAllByTestId for multiple items
     const listItems = await screen.findAllByTestId("list-item");
     expect(listItems[0]).toHaveTextContent("Item 1");
     expect(listItems.length).toBe(10);
@@ -66,7 +62,6 @@ describe("App Infinite Scroll", () => {
   it("shows loading indicator while fetching", async () => {
     render(<App />);
 
-    // Initially loading indicator is shown
     expect(screen.getByTestId("loading-text")).toBeInTheDocument();
 
     act(() => {
@@ -87,7 +82,6 @@ describe("App Infinite Scroll", () => {
 
     const loader = screen.getByTestId("loader-ref");
 
-    // Load all pages (5 pages total for 50 items)
     for (let i = 2; i <= 5; i++) {
       triggerIntersection(loader);
       act(() => {
@@ -103,7 +97,6 @@ describe("App Infinite Scroll", () => {
       );
     }
 
-    // After last page, end message is shown
     expect(await screen.findByTestId("end-message")).toHaveTextContent(
       /you’ve reached the end/i
     );
@@ -132,17 +125,14 @@ describe("App Infinite Scroll", () => {
       );
     }
 
-    // Try triggering intersection again after end
     triggerIntersection(loader);
 
     act(() => {
       jest.runAllTimers();
     });
 
-    // The number of items should remain 50, no more added
     expect(screen.getAllByTestId("list-item").length).toBe(50);
 
-    // End message still shown
     expect(screen.getByTestId("end-message")).toBeInTheDocument();
   });
 });

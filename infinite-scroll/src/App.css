@@ -1,6 +1,6 @@
 
 .scroll-container {
-  height: 400px; /* Enables scrolling */
+  height: 400px; 
   overflow-y: auto;
   padding: 1rem;
   border: 1px solid #ccc;
